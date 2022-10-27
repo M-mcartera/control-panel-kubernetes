@@ -1,9 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import AppBuilder from "./AppBuilder";
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import AppBuilder from './AppBuilder';
 
-root.render(<AppBuilder />);
+ReactDOM.render(<AppBuilder />, document.getElementById('app'));
 
-console.log("App has been loaded successfully");
+console.log('App has been loaded successfully');

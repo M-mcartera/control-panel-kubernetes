@@ -18,8 +18,8 @@ module.exports = () => {
   // Where files should be sent once they are bundled
   return {
     output: {
-      path: path.join(__dirname, '/dist'),
-      filename: 'index.bundle.js'
+      path: path.resolve(__dirname, '/dist'),
+      filename: 'bundle.index.js'
     },
     // webpack 5 comes with devServer which loads in development mode
     devServer: {
@@ -45,7 +45,9 @@ module.exports = () => {
       new HtmlWebpackPlugin({ template: './src/index.html' }),
       new MiniCssExtractPlugin(),
       new EsLintPlugin(),
-      new webpack.DefinePlugin(envKeys)
+      new webpack.DefinePlugin({
+        APPLICATION_CONFIG: JSON.stringify(envKeys)
+      })
     ]
   };
 };

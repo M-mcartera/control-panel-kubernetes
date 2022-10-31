@@ -1,6 +1,28 @@
 {
   "presets": [
-    "@babel/preset-env",
+    [
+      "@babel/preset-env",
+      {
+        "modules": "auto"
+      }
+    ],
     "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "fileName": false,
+        "minify": false
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-classes",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-spread"
   ]
 }

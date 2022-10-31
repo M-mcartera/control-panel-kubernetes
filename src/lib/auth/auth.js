@@ -1,9 +1,11 @@
 import { updateAbilities } from '../guards/abilities';
+import serverSettings from '../../../server/settings/serverSettings';
 
 let userPermissions = [];
 
 export const processToken = keycloakParsedToken => {
-  const clientIds = [process.env.REACT_APP_KEYCLOAK_CLIENT_ID || ''];
+  console.log(keycloakParsedToken);
+  const clientIds = [serverSettings.keycloakClientId || ''];
   const machineNameRoles = Object.keys(keycloakParsedToken.resource_access)
     .filter(clientId => clientIds.includes(clientId))
     .reduce((allRoles, clientId) => {

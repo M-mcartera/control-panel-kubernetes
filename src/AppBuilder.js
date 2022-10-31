@@ -1,10 +1,10 @@
-import { ReactKeycloakProvider } from '@react-keycloak/web';
 import React, { useState } from 'react';
-import keycloakClient from './keycloakClient';
-import { Space, Spin } from 'antd';
 import App from './App';
-import { processToken } from './lib/auth/auth';
 import KeycloakContext from './KeycloakContext';
+import { Space, Spin } from 'antd';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
+import keycloakClient from './keycloakClient';
+import { processToken } from './lib/auth/auth';
 
 const AppBuilder = () => {
   const [isReady, setIsReady] = useState(false);
@@ -12,7 +12,7 @@ const AppBuilder = () => {
   return (
     <ReactKeycloakProvider
       authClient={keycloakClient}
-      initOptions={{ onLoad: 'login-required' }}
+      initOptions={{ onLoad: 'login-required', checkLoginIframe: false }}
       LoadingComponent={
         <Space size="large">
           <Spin size="large" />

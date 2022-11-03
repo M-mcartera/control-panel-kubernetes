@@ -13,7 +13,7 @@ const RouteGuard = ({ permission, children }) => {
     return children;
   }
 
-  return <h1>not found</h1>
+  return <h1>not found</h1>;
 };
 
 export default RouteGuard;

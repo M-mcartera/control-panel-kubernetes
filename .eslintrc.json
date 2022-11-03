@@ -1,0 +1,71 @@
+//{
+//  "parser": "@babel/eslint-parser",
+//  "extends": ["airbnb"]
+//}
+{
+  "parser": "@babel/eslint-parser",
+  "extends": [
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "plugins": ["unused-imports", "jsx-a11y", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "requireConfigFile": false,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "import/resolver": ["node", "webpack"]
+  },
+
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "arrowParens": "avoid"
+      }
+    ],
+    "react/destructuring-assignment": "off",
+    "react/jsx-filename-extension": "off",
+    "react/button-has-type": "off",
+    "react/sort-comp": "off",
+    "react/prop-types": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/dynamic-import-chunkname": "error",
+    "import/order": "off",
+    "unused-imports/no-unused-imports": "error",
+    "class-methods-use-this": "off",
+    "no-console": "off",
+    "camelcase": "off",
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/alt-text": "off",
+    "no-underscore-dangle": "off",
+    "object-shorthand": "warn",
+    "no-undef": "error",
+    "react/display-name": "off",
+    "react/jsx-key": "warn",
+    "react/no-unescaped-entities": "warn"
+  }
+}

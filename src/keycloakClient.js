@@ -1,9 +1,10 @@
-import Keycloak from "keycloak-js";
+import Keycloak from 'keycloak-js';
+import serverSettings from '../server/settings/serverSettings';
 
-const keycloakClient = new Keycloak({
-	url: process.env.REACT_APP_KEYCLOAK_URL,
-	realm: process.env.REACT_APP_KEYCLOAK_REALM,
-	clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID,
+const keycloakClient = Keycloak({
+  url: serverSettings.keycloakUrl,
+  clientId: serverSettings.keycloakClientId,
+  realm: serverSettings.keycloakRealm
 });
 
 export default keycloakClient;

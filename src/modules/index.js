@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
-import KeycloakContext from "../KeycloakContext";
-import { isEmpty } from "lodash";
+import { useContext } from 'react';
+import KeycloakContext from '../KeycloakContext';
+import { isEmpty } from 'lodash';
+
 export default () => {
-	const { token } = useContext(KeycloakContext);
-	const userPermissions =
-		token?.resource_access[process.env.REACT_APP_KEYCLOAK_CLIENT_ID]?.roles ||
-		[];
+  const { token } = useContext(KeycloakContext);
+  const userPermissions =
+    token?.resource_access[process.env.REACT_APP_KEYCLOAK_CLIENT_ID]?.roles ||
+    [];
 
-	if (isEmpty(userPermissions)) {
-		return [];
-	}
+  if (isEmpty(userPermissions)) {
+    return [];
+  }
 
-	const modules = [];
+  const modules = [];
 
-	return modules;
+  return modules;
 };

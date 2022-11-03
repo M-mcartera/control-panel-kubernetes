@@ -1,8 +1,8 @@
-import React, { createContext } from "react";
+import { createContext } from 'react';
 
 const KeycloakContext = createContext({
-	token: "",
-	setToken: () => {},
+  token: '',
+  setToken: () => {}
 });
 
 export default KeycloakContext;

@@ -19,11 +19,13 @@ module.exports = () => {
   return {
     output: {
       path: path.resolve(__dirname, '/dist'),
-      filename: 'bundle.index.js'
+      filename: 'bundle.index.js',
+      publicPath: '/'
     },
     // webpack 5 comes with devServer which loads in development mode
     devServer: {
-      port: 8080
+      port: 8080,
+      historyApiFallback: true
     },
     // Rules of how webpack will take our files, complie & bundle them for the browser
     module: {

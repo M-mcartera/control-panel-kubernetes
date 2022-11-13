@@ -17,8 +17,7 @@ export default [
       {
         name: 'Add users',
         path: '/users/new'
-      },
-      { name: 'Edit users', path: '/users/:id/details' }
+      }
     ]
   }
 ];

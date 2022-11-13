@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const SidebarLayout = styled.div`
   display: flex;
   height: 100vh;
+  background-color: white;
+  box-shadow: 0 3px 25px 4px #f1f1f1;
 `;
 
 export const SidebarTitle = styled.div`
@@ -10,9 +12,11 @@ export const SidebarTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px;
+  height: 70px;
+  background-color: white;
   box-sizing: border-box;
   font-size: 18pt;
   font-family: Arial, sans-serif;
-  border-bottom: 1px solid #ccc;
+  outline: none;
+  border-right: none;
 `;

@@ -3,6 +3,7 @@ import { HOME, USERS_EDIT, USERS_LISTING, USERS_NEW } from './RoutePaths';
 import WelcomePage from '../pages/WelcomePage';
 import UsersListViewContainer from '../modules/users/containers/UsersListViewContainer';
 import UsersListingView from '../modules/users/views/UsersListingView';
+import GeneralLayout from '../components/GeneralLayout';
 
 export default [
   {
@@ -14,9 +15,11 @@ export default [
     path: USERS_LISTING,
     key: 'Users list',
     content: (
-      <UsersListViewContainer>
-        <UsersListingView />
-      </UsersListViewContainer>
+      <GeneralLayout>
+        <UsersListViewContainer>
+          <UsersListingView />
+        </UsersListViewContainer>
+      </GeneralLayout>
     )
   },
   {

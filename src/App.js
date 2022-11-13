@@ -3,18 +3,20 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import routes from './routes';
-import Nav from './components/Nav';
+import SidebarMenu from './components/SidebarMenu/SidebarMenu';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducers from './reducers/index';
+import Navbar from './components/Navbar';
 
 const GeneralLayout = styled.div`
   display: flex;
 `;
 
 const AppLayout = styled.div`
-  padding: 0 0 0 10px;
+  width: 100%;
+  background-color: #e8e8e8;
 `;
 
 const middlewareEnhancer = applyMiddleware(thunkMiddleware);
@@ -24,6 +26,7 @@ const store = createStore(rootReducers, undefined, composedEnhancers);
 const App = () => {
   return (
     <Provider store={store}>
+      {/*<Navbar />*/}
       <GeneralLayout>
         <ProSidebarProvider>
           <ThemeProvider theme={{}}>
@@ -33,8 +36,11 @@ const App = () => {
                   return (
                     <Route exact key={route.key} path={route.path}>
                       <>
-                        <Nav />
-                        <AppLayout>{route.content}</AppLayout>
+                        <SidebarMenu />
+                        <AppLayout>
+                          <Navbar />
+                          {route.content}
+                        </AppLayout>
                       </>
                     </Route>
                   );

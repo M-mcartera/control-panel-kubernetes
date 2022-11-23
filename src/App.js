@@ -9,6 +9,9 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducers from './reducers/index';
 import Navbar from './components/Navbar';
+import theme from './theme/theme';
+import GlobalStyles from './theme/GlobalStyles';
+import DefaultLoader from './components/Loader/Loader';
 
 const GeneralLayout = styled.div`
   display: flex;
@@ -26,10 +29,10 @@ const store = createStore(rootReducers, undefined, composedEnhancers);
 const App = () => {
   return (
     <Provider store={store}>
-      {/*<Navbar />*/}
       <GeneralLayout>
         <ProSidebarProvider>
-          <ThemeProvider theme={{}}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles />
             <BrowserRouter>
               <Switch>
                 {routes.map(route => {
@@ -38,6 +41,7 @@ const App = () => {
                       <>
                         <SidebarMenu />
                         <AppLayout>
+                          <DefaultLoader />
                           <Navbar />
                           {route.content}
                         </AppLayout>

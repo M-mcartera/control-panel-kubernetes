@@ -1,9 +1,18 @@
 import React from 'react';
-import { HOME, USERS_EDIT, USERS_LISTING, USERS_NEW } from './RoutePaths';
+import {
+  HOME,
+  USERS_EDIT,
+  USERS_LISTING,
+  USERS_NEW,
+  SETTINGS
+} from './RoutePaths';
 import WelcomePage from '../pages/WelcomePage';
 import UsersListViewContainer from '../modules/users/containers/UsersListViewContainer';
 import UsersListingView from '../modules/users/views/UsersListingView';
 import GeneralLayout from '../components/GeneralLayout';
+import SettingsCardsView from '../modules/settings/views/SettingsCardsView';
+import UsersEditView from '../modules/users/views/UsersEditView';
+import UsersEditViewContainer from '../modules/users/containers/UsersEditViewContainer';
 
 export default [
   {
@@ -15,7 +24,11 @@ export default [
     path: USERS_LISTING,
     key: 'Users list',
     content: (
-      <GeneralLayout>
+      <GeneralLayout
+        backText="Settings"
+        backlink={SETTINGS}
+        title="Users module"
+      >
         <UsersListViewContainer>
           <UsersListingView />
         </UsersListViewContainer>
@@ -30,6 +43,21 @@ export default [
   {
     path: USERS_EDIT,
     key: 'Users edit',
-    content: <h2>Users edit</h2>
+    content: (
+      <GeneralLayout
+        backText="Users list"
+        backlink={USERS_LISTING}
+        title="Edit users"
+      >
+        <UsersEditViewContainer>
+          <UsersEditView />
+        </UsersEditViewContainer>
+      </GeneralLayout>
+    )
+  },
+  {
+    path: SETTINGS,
+    key: 'Settings cards',
+    content: <SettingsCardsView />
   }
 ];

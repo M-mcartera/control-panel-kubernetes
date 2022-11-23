@@ -31,6 +31,7 @@ const SidebarMenu = ({}) => {
                   <MenuItem
                     active={handleActiveSubMenu(module)}
                     key={module.name}
+                    icon={module.icon}
                     label={module.name}
                     routerLink={<Link to={module.path} />}
                   >

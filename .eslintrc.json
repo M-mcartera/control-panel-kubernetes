@@ -1,7 +1,3 @@
-//{
-//  "parser": "@babel/eslint-parser",
-//  "extends": ["airbnb"]
-//}
 {
   "parser": "@babel/eslint-parser",
   "extends": [

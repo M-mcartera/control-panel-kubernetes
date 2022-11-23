@@ -1,4 +1,4 @@
-import { FaUsers } from 'react-icons/fa';
+import { FiSettings } from 'react-icons/fi';
 import React from 'react';
 
 export default [
@@ -7,17 +7,8 @@ export default [
     path: '/'
   },
   {
-    name: 'Users',
-    icon: <FaUsers />,
-    subMenuItems: [
-      {
-        name: 'View users',
-        path: '/users'
-      },
-      {
-        name: 'Add users',
-        path: '/users/new'
-      }
-    ]
+    name: 'Settings',
+    icon: <FiSettings />,
+    path: '/settings'
   }
 ];

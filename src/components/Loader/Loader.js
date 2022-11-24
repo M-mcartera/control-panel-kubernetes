@@ -19,7 +19,6 @@ const StyledSpinnerWrapper = styled.div`
   z-index: 3;
 `;
 const LoadingSpinner = ({ isLoading }) => {
-  console.log({ isLoading });
   const theme = useTheme();
   const color = !isEmpty(theme) ? theme.spinner.color : '#9690E1';
   const radius = !isEmpty(theme) ? theme.spinner.radius : 120;
@@ -43,5 +42,4 @@ const mapStateToProps = state => {
   return { isLoading };
 };
 
-const mapDispatchToProps = dispatch => ({});
-export default connect(mapStateToProps, mapDispatchToProps)(LoadingSpinner);
+export default connect(mapStateToProps, null)(LoadingSpinner);

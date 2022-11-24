@@ -5,6 +5,7 @@ import AntdTable from '../../../components/Table';
 import columnsConfig from '../configs/columnsConfig';
 import { useHistory } from 'react-router-dom';
 import { USERS_EDIT } from '../../../routes/RoutePaths';
+import Card from '../../../components/Card/Card';
 
 const UsersListingView = ({ onLoad, users }) => {
   const history = useHistory();
@@ -24,14 +25,14 @@ const UsersListingView = ({ onLoad, users }) => {
     return <></>;
   }
   return (
-    <>
+    <Card>
       <SectionHeaderTitle title="Users list" />
       <AntdTable
         data={users}
         columnsConfig={columnsConfig(onDelete)}
         onRowClick={handleRowClick}
       />
-    </>
+    </Card>
   );
 };
 

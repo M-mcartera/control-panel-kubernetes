@@ -75,5 +75,8 @@ export default {
     color: '#9690E1',
     radius: 120,
     stroke: 2
+  },
+  font: {
+    defaultFont: 'Poppins, sans-serif'
   }
 };

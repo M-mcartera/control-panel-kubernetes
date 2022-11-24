@@ -9,10 +9,10 @@ import {
 import WelcomePage from '../pages/WelcomePage';
 import UsersListViewContainer from '../modules/users/containers/UsersListViewContainer';
 import UsersListingView from '../modules/users/views/UsersListingView';
-import GeneralLayout from '../components/GeneralLayout';
 import SettingsCardsView from '../modules/settings/views/SettingsCardsView';
 import UsersEditView from '../modules/users/views/UsersEditView';
 import UsersEditViewContainer from '../modules/users/containers/UsersEditViewContainer';
+import RefactoredGeneralLayout from '../components/RefactoredGeneralLayout';
 
 export default [
   {
@@ -24,15 +24,11 @@ export default [
     path: USERS_LISTING,
     key: 'Users list',
     content: (
-      <GeneralLayout
-        backText="Settings"
-        backlink={SETTINGS}
-        title="Users module"
-      >
+      <RefactoredGeneralLayout title="Users settings">
         <UsersListViewContainer>
           <UsersListingView />
         </UsersListViewContainer>
-      </GeneralLayout>
+      </RefactoredGeneralLayout>
     )
   },
   {
@@ -44,15 +40,11 @@ export default [
     path: USERS_EDIT,
     key: 'Users edit',
     content: (
-      <GeneralLayout
-        backText="Users list"
-        backlink={USERS_LISTING}
-        title="Edit users"
-      >
+      <RefactoredGeneralLayout title="Edit user">
         <UsersEditViewContainer>
           <UsersEditView />
         </UsersEditViewContainer>
-      </GeneralLayout>
+      </RefactoredGeneralLayout>
     )
   },
   {

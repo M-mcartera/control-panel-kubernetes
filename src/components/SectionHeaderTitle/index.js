@@ -8,21 +8,12 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  :after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: calc(100% - 60%);
-    height: 3px;
-    border-radius: 0 15px 15px 0;
-    background-color: cornflowerblue;
-  }
 `;
 const Title = styled.div`
   width: 100%;
-  font-size: 20px;
-  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
 `;
 
 const SectionHeaderTitle = ({ title }) => {

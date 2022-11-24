@@ -36,6 +36,7 @@ const GlobalStyles = createGlobalStyle`
   table {
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse;
   }
 
   ul.ant-pagination {
@@ -54,9 +55,17 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     color: ${props => props.theme.default.title};
     text-transform: lowercase;
-    background: #fafafb !important;
     border: 0 !important;
     padding: 10px;
+  }
+  .ant-table-thead > tr > th {
+    background: #F5F6FA 0 0 no-repeat padding-box;
+  }
+  
+  .ant-table-tbody > tr {
+    :hover {
+      background: #F5F6FA 0 0 no-repeat padding-box;
+    }
   }
 
   .ant-table-thead > tr > th{

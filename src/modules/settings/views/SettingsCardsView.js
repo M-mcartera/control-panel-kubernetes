@@ -3,47 +3,63 @@ import { FaUsers } from 'react-icons/fa';
 import { MdManageSearch } from 'react-icons/md';
 import { GrDeploy } from 'react-icons/gr';
 import { SettingsCardComponent } from '../components/SettingsCardComponent';
+import RefactoredGeneralLayout from '../../../components/RefactoredGeneralLayout';
 import styled from 'styled-components';
+import {
+  GENERAL_SETTINGS,
+  ROLES_LISTING,
+  USERS_LISTING
+} from '../../../routes/RoutePaths';
+import Card from '../../../components/Card/Card';
 
 const settingsCards = [
   {
     title: 'users',
-    path: '/users',
+    path: USERS_LISTING,
     description: 'Users management',
     icon: <FaUsers />
   },
   {
     title: 'roles',
-    path: '/roles',
+    path: ROLES_LISTING,
     description: 'roles management',
     icon: <MdManageSearch />
   },
   {
     title: 'general',
-    path: '/settings/general',
+    path: GENERAL_SETTINGS,
     description: 'General settings management',
     icon: <GrDeploy />
   }
 ];
-const CardLayout = styled.div`
+
+const CardsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  column-gap: 20px;
-  margin: 10px 50px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 50px;
+  row-gap: 50px;
+  ${Card} {
+    width: 300px;
+    height: auto;
+  }
 `;
 const SettingsCardsView = () => {
   return (
-    <CardLayout>
-      {settingsCards.map(card => (
-        <SettingsCardComponent
-          path={card.path}
-          title={card.title}
-          description={card.description}
-          icon={card.icon}
-          key={card.key}
-        />
-      ))}
-    </CardLayout>
+    <RefactoredGeneralLayout title="Settings Modules">
+      <CardsWrapper>
+        {settingsCards.map(card => (
+          <Card key={card.key}>
+            <SettingsCardComponent
+              path={card.path}
+              title={card.title}
+              description={card.description}
+              icon={card.icon}
+            />
+          </Card>
+        ))}
+      </CardsWrapper>
+    </RefactoredGeneralLayout>
   );
 };
 

@@ -1,26 +1,20 @@
-name: Deploy to ECR
-
 on:
- 
   push:
     branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+name: DEPLOY TO ECT
 
 jobs:
-  
-  build:
-    
-    name: Build Image
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
 
-   
     steps:
-
-    - name: Check out code
+    - name: Checkout
       uses: actions/checkout@v2
-      
-    - name: Set Deploy date
-      run:  echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
-    
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -32,11 +26,15 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push the image to Amazon ECR
+      id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: docker_images
-        IMAGE_TAG: $NOW
+        ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+        IMAGE_TAG: 1.0
       run: |
+        # Build a docker container and push it to ECR 
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        echo "Pushing image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

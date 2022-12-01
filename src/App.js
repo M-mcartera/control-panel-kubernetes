@@ -39,10 +39,8 @@ const App = () => {
                     <Route exact key={route.key} path={route.path}>
                       <>
                         <RestyledNavbar />
-                        {/*<SidebarMenu />*/}
                         <AppLayout>
                           <DefaultLoader />
-                          {/*<Navbar />*/}
                           {route.content}
                         </AppLayout>
                       </>

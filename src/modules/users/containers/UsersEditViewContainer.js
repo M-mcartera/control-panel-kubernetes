@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { fetchUser, fetchRoles } from '../store/actions';
+import {
+  fetchUser,
+  fetchRoles,
+  updateUser,
+  deleteUser
+} from '../store/actions';
 
 const mapStateToProps = state => ({
-  users: state.users.users
+  user: state.users.editUser,
+  roles: state.users.roles
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -12,6 +18,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const { id } = ownProps.match.params;
     dispatch(fetchUser(id));
     dispatch(fetchRoles());
+  },
+  updateUser: data => {
+    const { id: username } = ownProps.match.params;
+    dispatch(updateUser(username, data));
+  },
+  deleteUser: () => {
+    const { id: username } = ownProps.match.params;
+    dispatch(deleteUser(username, ownProps.history));
   }
 });
 

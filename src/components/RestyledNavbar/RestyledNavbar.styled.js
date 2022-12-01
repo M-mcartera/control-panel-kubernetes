@@ -25,7 +25,7 @@ export const NavbarTitle = styled.div`
   }
 `;
 
-export const NavBarItemText = styled.text`
+export const NavBarItemText = styled.span`
   color: #171725;
   font-size: 14px;
   letter-spacing: 0.1px;

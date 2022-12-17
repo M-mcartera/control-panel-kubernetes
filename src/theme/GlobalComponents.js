@@ -62,6 +62,9 @@ export const FormSubmitButton = styled(Button)`
   border-radius: 15px;
   background-color: #57b8ff;
   letter-spacing: 0.12px;
+  display: flex;
+  column-gap: 3px;
+  align-items: center;
   color: #fff;
 `;
 

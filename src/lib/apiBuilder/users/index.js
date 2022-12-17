@@ -11,5 +11,8 @@ export default restClient => ({
   },
   async deleteUser(username) {
     return restClient.delete(`${resourceUrl}/${username}`);
+  },
+  async createUser(data) {
+    return restClient.post(resourceUrl, { payload: data });
   }
 });

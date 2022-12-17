@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { USERS_EDIT } from '../../../routes/RoutePaths';
 import Card from '../../../components/Card/Card';
 import { Modal } from 'antd';
+import { RiAddLine } from 'react-icons/ri';
 
 const UsersListingView = ({ onLoad, users, deleteUser }) => {
   const history = useHistory();
@@ -29,7 +30,18 @@ const UsersListingView = ({ onLoad, users, deleteUser }) => {
   }
   return (
     <Card>
-      <SectionHeaderTitle title="Users list" />
+      <SectionHeaderTitle
+        title="Users list"
+        buttons={[
+          {
+            icon: <RiAddLine />,
+            label: 'New user',
+            onClick: () => {
+              history.push(USERS_EDIT.replace(':id', 'new'));
+            }
+          }
+        ]}
+      />
       <AntdTable
         data={users}
         columnsConfig={columnsConfig(onDelete)}

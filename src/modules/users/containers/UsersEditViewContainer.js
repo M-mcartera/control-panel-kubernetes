@@ -5,7 +5,10 @@ import {
   fetchUser,
   fetchRoles,
   updateUser,
-  deleteUser
+  deleteUser,
+  setNewUserLayout,
+  createUser,
+  resetUser
 } from '../store/actions';
 
 const mapStateToProps = state => ({
@@ -16,7 +19,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onLoad: () => {
     const { id } = ownProps.match.params;
-    dispatch(fetchUser(id));
+    if (id !== 'new') {
+      dispatch(fetchUser(id));
+    } else {
+      dispatch(resetUser());
+      dispatch(setNewUserLayout(true));
+    }
     dispatch(fetchRoles());
   },
   updateUser: data => {
@@ -26,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteUser: () => {
     const { id: username } = ownProps.match.params;
     dispatch(deleteUser(username, ownProps.history));
+  },
+  createUser: data => {
+    dispatch(createUser(data, ownProps.history));
   }
 });
 

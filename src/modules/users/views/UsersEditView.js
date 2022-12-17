@@ -25,7 +25,14 @@ import { USERS_LISTING } from '../../../routes/RoutePaths';
 import { validateEmail } from '../../../utils';
 
 const { Option } = Select;
-const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
+const UsersEditView = ({
+  onLoad,
+  user,
+  roles,
+  updateUser,
+  deleteUser,
+  createUser
+}) => {
   const history = useHistory();
 
   useEffect(() => {
@@ -43,22 +50,46 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
   const [changed, setChanged] = useState(false);
   const [errors, setErrors] = useState({});
   const [isVisible, setIsVisible] = useState(false);
+  const [isNew, setIsNew] = useState(false);
 
-  const handleResetForm = () => {
+  const setFormDefault = () => {
     setFormData(prevState => {
       return {
         ...prevState,
-        createdOn: format(new Date(user.createdTimestamp), 'eeee, io yyyy'),
-        email: user.email,
-        username: user.username,
-        roles: user.roles
+        createdOn: '',
+        email: '',
+        username: '',
+        password: '',
+        reTypePassword: '',
+        roles: []
       };
     });
   };
 
+  const handleResetForm = () => {
+    if (isNew) {
+      setFormDefault();
+    } else {
+      setFormData(prevState => {
+        return {
+          ...prevState,
+          createdOn: format(new Date(user.createdTimestamp), 'eeee, io yyyy'),
+          email: user.email,
+          username: user.username,
+          roles: user.roles
+        };
+      });
+    }
+  };
+
   useEffect(() => {
     if (!isEmpty(user)) {
-      handleResetForm();
+      if (user.isNew) {
+        setIsNew(true);
+        setFormDefault();
+      } else {
+        handleResetForm();
+      }
     }
   }, [user, roles]);
 
@@ -90,7 +121,7 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
     } = user;
 
     const compareInitialValues = {
-      createdOn: format(new Date(createdOn), 'eeee, io yyyy'),
+      createdOn: createdOn ? format(new Date(createdOn), 'eeee, io yyyy') : '',
       username,
       email,
       roles
@@ -119,6 +150,9 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
   const validate = () => {
     const errors = {};
     const requiredFields = ['username', 'email', 'roles'];
+    if (isNew) {
+      requiredFields.push('password', 'reTypePassword');
+    }
     requiredFields.forEach(field => {
       if (isEmpty(trim(formData[field]))) {
         errors[field] = 'This field is required';
@@ -156,7 +190,11 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
     const validaTeResponse = validate();
 
     if (validaTeResponse) {
-      updateUser(formData);
+      if (isNew) {
+        createUser(formData);
+      } else {
+        updateUser(formData);
+      }
     }
   };
 
@@ -167,7 +205,9 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
   return (
     <Card>
       <HeadWrapper>
-        <HeadTitle>Edit {user.username}&apos;s details</HeadTitle>
+        <HeadTitle>
+          {isNew ? 'Create new user' : `Edit ${user.username}'s details`}
+        </HeadTitle>
         <HeadButtons>
           <DeleteButton
             onDelete={() => {
@@ -179,19 +219,29 @@ const UsersEditView = ({ onLoad, user, roles, updateUser, deleteUser }) => {
       <AntdDivider />
 
       <FormWrapper>
-        <Row>
-          <div>
-            <InputLabel>Created on</InputLabel>
+        {!isNew ? (
+          <Row>
             <div>
-              <Input disabled value={formData.createdOn} />
+              <InputLabel>Created on</InputLabel>
+              <div>
+                <Input disabled value={formData.createdOn} />
+              </div>
             </div>
-          </div>
-        </Row>
+          </Row>
+        ) : (
+          <></>
+        )}
         <Row>
           <div>
             <InputLabel>Username</InputLabel>
             <div>
-              <Input disabled value={formData.username} />
+              <Input
+                disabled={!isNew}
+                value={formData.username}
+                onChange={e => {
+                  handleChange('username', e.target.value);
+                }}
+              />
             </div>
             <Error error={errors.username} />
           </div>

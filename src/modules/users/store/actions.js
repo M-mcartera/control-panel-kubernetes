@@ -1,7 +1,7 @@
 import * as t from './actionPaths';
 import api from '../../../lib/restClient/api';
 import { toast } from 'react-toastify';
-import { USERS_LISTING } from '../../../routes/RoutePaths';
+import { USERS_EDIT, USERS_LISTING } from '../../../routes/RoutePaths';
 
 export const fetchUsers = () => dispatch => {
   dispatch({ type: t.SET_LOADING, payload: true });
@@ -57,3 +57,25 @@ export const deleteUser =
       }
     });
   };
+
+export const setNewUserLayout = payload => ({
+  type: t.SET_NEW_USER_LAYOUT,
+  payload
+});
+
+export const createUser = (data, history) => dispatch => {
+  dispatch({ type: t.SET_LOADING, payload: true });
+  return api.users.createUser(data).then(({ json, status }) => {
+    if (status === 200) {
+      toast.success('User successfully created');
+    } else {
+      toast.error(json.msg);
+    }
+    dispatch({ type: t.SET_LOADING, payload: false });
+    history.push(USERS_EDIT.replace(':id', data.username));
+  });
+};
+
+export const resetUser = () => ({
+  type: t.RESET_USER
+});

@@ -21,6 +21,12 @@ export default (state = initialValues, action) => {
     case t.SET_ROLES: {
       return { ...state, roles: action.payload };
     }
+    case t.SET_NEW_USER_LAYOUT: {
+      return { ...state, editUser: { isNew: action.payload } };
+    }
+    case t.RESET_USER: {
+      return { ...state, editUser: null };
+    }
     default:
       return state;
   }

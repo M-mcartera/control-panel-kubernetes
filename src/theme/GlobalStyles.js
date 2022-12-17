@@ -89,6 +89,8 @@ const GlobalStyles = createGlobalStyle`
   .ant-table-tbody > tr > td:nth-child(1) {
     font-family: ${({ theme }) => theme.default.font}, sans-serif;
     font-weight: 500;
-  }`;
+  }
+
+`;
 
 export default GlobalStyles;

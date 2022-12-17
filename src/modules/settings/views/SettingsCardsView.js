@@ -15,18 +15,21 @@ import Card from '../../../components/Card/Card';
 const settingsCards = [
   {
     title: 'users',
+    key: 'users',
     path: USERS_LISTING,
     description: 'Users management',
     icon: <FaUsers />
   },
   {
     title: 'roles',
+    key: 'roles',
     path: ROLES_LISTING,
     description: 'roles management',
     icon: <MdManageSearch />
   },
   {
     title: 'general',
+    key: 'general',
     path: GENERAL_SETTINGS,
     description: 'General settings management',
     icon: <GrDeploy />

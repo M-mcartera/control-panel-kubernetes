@@ -11,6 +11,7 @@ const AntdTable = ({ columnsConfig, data, onRowClick }) => {
   return (
     <TableWrapper>
       <Table
+        rowKey="row"
         bordered={false}
         dataSource={data}
         columns={columnsConfig}

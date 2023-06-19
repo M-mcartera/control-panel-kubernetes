@@ -9,11 +9,9 @@ import InputGroup from "./components/InputGroup";
 import Input from "./components/Input";
 import Button from "./components/Button";
 import React, { useState } from "react";
-import RestClient from "./RestClient";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
 import { publicAxios } from "./api/axios";
-import axios from "axios";
 
 function App() {
   const [email, setEmail] = useState<string>("");

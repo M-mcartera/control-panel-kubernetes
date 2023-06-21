@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "antd/dist/reset.css";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -8,12 +9,14 @@ import { GlobalStyle } from "./reset.css";
 import SettingsModule from "./pages/Settings";
 import SettingsController from "./pages/Settings/SettingsController";
 import { AuthProvider } from "./context/AuthContext/AuthContext";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <ToastContainer />
     <AuthProvider>
       <Router>
         <GlobalStyle />

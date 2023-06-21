@@ -1,5 +1,7 @@
 export type User = {
+  _id: string;
   email: string;
-  role: string;
+  username: string;
+  role: "ADMIN" | "USER" | null;
   active?: boolean;
 };

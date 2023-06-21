@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
 import { publicAxios } from "./api/axios";
+import { validateEmail } from "./helpers";
 
 function App() {
   const [email, setEmail] = useState<string>("");
@@ -25,11 +26,6 @@ function App() {
   const resetInput = () => {
     setEmail("");
     setPassword("");
-  };
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    return emailRegex.test(email);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,8 +60,8 @@ function App() {
 
       setAuth({ user: "", token: access_token });
 
-      // const userInformation = await publicAxios.get("/users/profile");
-      // console.log({ userInformation });
+      localStorage.setItem("token", access_token);
+
       resetInput();
       navigate("/settings/users");
     } catch {

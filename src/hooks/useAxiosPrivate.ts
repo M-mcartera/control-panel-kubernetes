@@ -6,13 +6,18 @@ import useAuth from "./useAuth";
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const { auth } = useAuth();
-  console.log({ auth });
 
   useEffect(() => {
     const requestIntercept = privateAxios.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization "]) {
-          config.headers["Authorization "] = `Bearer ${auth?.token}`;
+          if (auth?.token) {
+            config.headers["Authorization "] = `Bearer ${auth?.token}`;
+          } else if (!auth?.token && localStorage.getItem("token")) {
+            config.headers["Authorization "] = `Bearer ${localStorage.getItem(
+              "token"
+            )}`;
+          }
         }
         console.log({ config });
         return config;

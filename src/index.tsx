@@ -11,6 +11,7 @@ import SettingsController from "./pages/Settings/SettingsController";
 import { AuthProvider } from "./context/AuthContext/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RegisterInvitationHandler from "./components/RegisterInvitationHandler";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -24,6 +25,10 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="/settings" element={<SettingsModule />} />
           <Route path="/settings/:tab" element={<SettingsController />} />
+          <Route
+            path="/invitation/register"
+            element={<RegisterInvitationHandler />}
+          />
         </Routes>
       </Router>
     </AuthProvider>

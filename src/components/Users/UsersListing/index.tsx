@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { User } from "../types";
 import { Dropdown, MenuProps, Table } from "antd";
@@ -12,9 +12,9 @@ import HandleUser from "../HandleUser/HandleUser";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import DefaultButton from "../../DefaultButton";
-import { stringify } from "querystring";
-import { ColumnsType, ColumnType } from "antd/lib/table";
+import { ColumnsType } from "antd/lib/table";
 import ModuleTitle from "../../ModuleTitle";
+import SocketContext from "../../../context/SocketContext/SocketContext";
 
 export type UserCreatePayload = {
   email: string;
@@ -33,6 +33,13 @@ const UsersListing = () => {
   const [trigger, setTrigger] = useState<boolean>(false);
   const [firstRender, setFirstRender] = useState<boolean>(true);
 
+  const { socket } = useContext(SocketContext);
+
+  useEffect(() => {
+    socket?.on("message", (data: any) => {
+      console.log(data);
+    });
+  }, [socket]);
   useEffect(() => {
     if (firstRender || trigger) {
       (async () => {

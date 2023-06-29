@@ -9,9 +9,12 @@ import { GlobalStyle } from "./reset.css";
 import SettingsModule from "./pages/Settings";
 import SettingsController from "./pages/Settings/SettingsController";
 import { AuthProvider } from "./context/AuthContext/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterInvitationHandler from "./components/RegisterInvitationHandler";
+import Home from "./components/Home";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import { SideBarProvider } from "./context/SidebarContext.tsx/SidebarContext";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -19,18 +22,42 @@ root.render(
   <React.StrictMode>
     <ToastContainer />
     <AuthProvider>
-      <Router>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/settings" element={<SettingsModule />} />
-          <Route path="/settings/:tab" element={<SettingsController />} />
-          <Route
-            path="/invitation/register"
-            element={<RegisterInvitationHandler />}
-          />
-        </Routes>
-      </Router>
+      <SideBarProvider>
+        <Router>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <PrivateRoute>
+                  <SettingsModule />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/settings/:tab"
+              element={
+                <PrivateRoute>
+                  <SettingsController />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/invitation/register"
+              element={<RegisterInvitationHandler />}
+            />
+          </Routes>
+        </Router>
+      </SideBarProvider>
     </AuthProvider>
   </React.StrictMode>
 );

@@ -63,7 +63,7 @@ function App() {
       localStorage.setItem("token", access_token);
 
       resetInput();
-      navigate("/settings/users");
+      navigate("/home");
     } catch {
       setFormError("Internal Server Error, please try again later");
       resetInput();
@@ -72,7 +72,7 @@ function App() {
 
   return (
     <EntryPage>
-      <PageHeader to="/">LOGO</PageHeader>
+      <PageHeader to="/">Kubernetes control panel</PageHeader>
       <EntryCard>
         <ErrorMessage>{formError}</ErrorMessage>
         <form

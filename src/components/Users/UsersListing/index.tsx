@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { User } from "../types";
 import { Dropdown, MenuProps, Table } from "antd";
-import { ActionsElipsis, FooterButtons } from "../../globalComponents";
+import {
+  ActionsElipsis,
+  FooterButtons,
+  StyledTable,
+} from "../../globalComponents";
 import { Modal } from "antd";
 import HandleUser from "../HandleUser/HandleUser";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
+import DefaultButton from "../../DefaultButton";
+import { stringify } from "querystring";
+import { ColumnsType, ColumnType } from "antd/lib/table";
+import ModuleTitle from "../../ModuleTitle";
 
 export type UserCreatePayload = {
   email: string;
@@ -90,6 +98,12 @@ const UsersListing = () => {
     },
   ];
 
+  interface UserColumn {
+    title: string;
+    dataIndex: string;
+    key?: string;
+    render?: (_: any, row: User) => React.ReactNode;
+  }
   const columns = [
     {
       title: "Id",
@@ -146,7 +160,7 @@ const UsersListing = () => {
         </Dropdown>
       ),
     },
-  ];
+  ] as ColumnsType<any>;
 
   const handleCreateUser = async (payload: UserCreatePayload) => {
     try {
@@ -273,16 +287,20 @@ const UsersListing = () => {
   };
   return (
     <div>
-      <h1>Users Listing</h1>
-      <button
+      <ModuleTitle title="Users Listing" backButtonPath="/settings" />
+      <DefaultButton
+        title="  Create user"
         onClick={(e) => {
           e.preventDefault();
           handleAddNewUser();
         }}
-      >
-        Create user
-      </button>
-      <Table columns={columns} dataSource={data}></Table>
+      />
+
+      <StyledTable
+        columns={columns}
+        dataSource={data}
+        rowClassName={() => "custom-row"}
+      ></StyledTable>
       <Modal
         title={modalTitle}
         open={isModalOpen}

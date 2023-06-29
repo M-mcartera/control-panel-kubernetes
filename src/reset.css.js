@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Roboto', sans-serif;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Roboto', sans-serif;
         color: #333;
         -webkit-font-smoothing: antialiased;
         -mos-osx-font-smoothing: grayscale;

@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { publicAxios } from "../../api/axios";
 import { validatePassword } from "../../helpers";

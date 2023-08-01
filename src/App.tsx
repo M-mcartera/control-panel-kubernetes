@@ -56,7 +56,7 @@ function App() {
         password,
       });
 
-      const { access_token = "" } = response.data;
+      const { access_token } = response.data.data;
 
       setAuth({ user: "", token: access_token });
 

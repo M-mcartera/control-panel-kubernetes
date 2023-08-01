@@ -1,4 +1,4 @@
-import { HomeOutline, SettingsOutline } from "react-ionicons";
+import { HomeOutline, LayersOutline, SettingsOutline } from "react-ionicons";
 import { SidebarItem } from "./Sidebar";
 export const sidebarData = ({
   handleItemClick,
@@ -20,9 +20,18 @@ export const sidebarData = ({
       }}
     />,
     <SidebarItem
+      icon={<LayersOutline />}
+      text="Resources"
+      active={activeItem === 1}
+      onClick={() => {
+        handleItemClick(0);
+        handleNavigate("/resources");
+      }}
+    />,
+    <SidebarItem
       icon={<SettingsOutline />}
       text="Settings"
-      active={activeItem === 1}
+      active={activeItem === 2}
       onClick={() => {
         handleItemClick(1);
         handleNavigate("/settings");

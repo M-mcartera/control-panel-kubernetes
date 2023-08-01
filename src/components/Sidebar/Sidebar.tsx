@@ -47,12 +47,14 @@ const SideBar = () => {
   const location = useLocation();
   const path = location.pathname;
   useEffect(() => {
-    console.log(path);
     if (path.includes("settings")) {
-      setActiveItem(1);
+      setActiveItem(2);
     }
     if (path.includes("home")) {
       setActiveItem(0);
+    }
+    if (path.includes("resources")) {
+      setActiveItem(1);
     }
   }, [path]);
 

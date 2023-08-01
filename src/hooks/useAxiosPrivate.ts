@@ -19,7 +19,6 @@ const useAxiosPrivate = () => {
             )}`;
           }
         }
-        console.log({ config });
         return config;
       },
       (error) => Promise.reject(error)

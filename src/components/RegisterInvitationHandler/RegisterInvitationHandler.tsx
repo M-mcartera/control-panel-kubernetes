@@ -65,7 +65,7 @@ const RegisterInvitationHandler = () => {
           const response = await publicAxios.get(
             `/users/validate-invitation?token=${token}`
           );
-          const { success } = response.data;
+          const { success } = response.data.data;
           if (success) {
             setModalOpen(true);
           } else {
@@ -104,7 +104,7 @@ const RegisterInvitationHandler = () => {
         token,
       });
 
-      const { success } = response.data;
+      const { success } = response.data.data;
       if (success) {
         toast.success("Account created successfully!");
         setModalOpen(false);

@@ -40,13 +40,13 @@ const UsersListing = () => {
       console.log(data);
     });
   }, [socket]);
+
   useEffect(() => {
     if (firstRender || trigger) {
       (async () => {
         try {
           const response = await axiosPrivate.get("/users");
-          console.log({ response: response.data });
-          const users = response.data;
+          const users = response.data.data;
           setData(
             users.map((u: any, index: number) => ({ ...u, index: index + 1 }))
           );
@@ -105,12 +105,6 @@ const UsersListing = () => {
     },
   ];
 
-  interface UserColumn {
-    title: string;
-    dataIndex: string;
-    key?: string;
-    render?: (_: any, row: User) => React.ReactNode;
-  }
   const columns = [
     {
       title: "Id",
@@ -296,7 +290,7 @@ const UsersListing = () => {
     <div>
       <ModuleTitle title="Users Listing" backButtonPath="/settings" />
       <DefaultButton
-        title="  Create user"
+        title="Create user"
         onClick={(e) => {
           e.preventDefault();
           handleAddNewUser();

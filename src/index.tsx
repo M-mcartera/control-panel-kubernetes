@@ -16,6 +16,8 @@ import Home from "./components/Home";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import { SideBarProvider } from "./context/SidebarContext/SidebarContext";
 import { SocketProvider } from "./context/SocketContext/SocketContext";
+import Resources from "./pages/Resources";
+import ResourcesController from "./pages/Resources/ResourcesController";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -56,6 +58,22 @@ root.render(
               <Route
                 path="/invitation/register"
                 element={<RegisterInvitationHandler />}
+              />
+              <Route
+                path="/resources"
+                element={
+                  <PrivateRoute>
+                    <Resources />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/resources/:tab"
+                element={
+                  <PrivateRoute>
+                    <ResourcesController />
+                  </PrivateRoute>
+                }
               />
             </Routes>
           </Router>

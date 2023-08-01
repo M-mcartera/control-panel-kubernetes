@@ -95,7 +95,7 @@ interface StyledTableProps<T> extends TableProps<T> {
   columns: ColumnsType<any>;
 }
 
-export const StyledTable = styled(Table)<StyledTableProps<User>>`
+export const StyledTable = styled(Table)<StyledTableProps<any>>`
   .ant-table {
     background-color: #fff;
     border-radius: 8px;

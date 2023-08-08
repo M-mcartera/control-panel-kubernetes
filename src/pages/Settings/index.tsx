@@ -34,6 +34,21 @@ const SettingsModule = () => {
       content: "Manage your users",
       path: "users",
     },
+    {
+      title: (
+        <CardTitleWrapper>
+          <span>Roles</span>
+          <PersonOutline
+            color={"#ffffff"}
+            title="Roles"
+            height="40px"
+            width="30px"
+          />
+        </CardTitleWrapper>
+      ),
+      content: "Manage your RBAC roles",
+      path: "roles",
+    },
   ];
   return (
     <CardsWrapper>

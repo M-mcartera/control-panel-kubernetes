@@ -8,3 +8,7 @@ export const validatePassword = (password: string): boolean => {
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return passwordRegex.test(password);
 };
+
+export const firstLetterUppercase = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

@@ -89,6 +89,7 @@ export const PageLayout = styled.div<{ open: boolean }>`
 
 export const Wrapper = styled.div`
   background: #e4e9f7;
+  overflow: auto;
 `;
 
 interface StyledTableProps<T> extends TableProps<T> {

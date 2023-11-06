@@ -15,12 +15,18 @@ import DefaultButton from "../../DefaultButton";
 import { ColumnsType } from "antd/lib/table";
 import ModuleTitle from "../../ModuleTitle";
 import SocketContext from "../../../context/SocketContext/SocketContext";
+import { Role } from "../../Roles/types";
 
 export type UserCreatePayload = {
   email: string;
   username: string;
   password: string;
   role: "ADMIN" | "USER";
+};
+
+export type RoleOptionsType = {
+  value: string;
+  label: string;
 };
 const UsersListing = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -32,6 +38,7 @@ const UsersListing = () => {
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
   const [trigger, setTrigger] = useState<boolean>(false);
   const [firstRender, setFirstRender] = useState<boolean>(true);
+  const [clusterRoles, setClusterRoles] = useState<RoleOptionsType[]>([]);
 
   const { socket } = useContext(SocketContext);
 
@@ -58,6 +65,17 @@ const UsersListing = () => {
       })();
     }
   }, [trigger, firstRender]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axiosPrivate.get("/roles");
+      const roles: Role[] = response.data.data;
+      setClusterRoles(
+        roles.map((role: Role) => ({ value: role._id, label: role.roleName }))
+      );
+    })();
+  }, []);
+
 
   const resetModal = () => {
     setModalContent(null);
@@ -196,6 +214,7 @@ const UsersListing = () => {
           handleCreateUser(data);
         }}
         buttonName={"Inivte User"}
+        clusterRoles={clusterRoles}
       />
     );
     setIsModalOpen(true);
@@ -211,6 +230,7 @@ const UsersListing = () => {
           handleUpdateUser(data);
         }}
         buttonName={"Update User"}
+        clusterRoles={clusterRoles}
       />
     );
   };

@@ -6,7 +6,7 @@ import Input from "../../Input";
 import InputGroup from "../../InputGroup";
 import CustomSelect from "../../Select";
 import { User } from "../types";
-import { UserCreatePayload } from "../UsersListing";
+import { RoleOptionsType, UserCreatePayload } from "../UsersListing";
 interface CreateUserErrors {
   email: string;
   username: string;
@@ -22,10 +22,12 @@ const CreateUser = ({
   onSubmit,
   user,
   buttonName,
+  clusterRoles,
 }: {
   onSubmit: (payload: UserCreatePayload) => void;
   user?: User;
   buttonName: string;
+  clusterRoles: RoleOptionsType[];
 }) => {
   const [errors, setErrors] = useState<CreateUserErrors>({
     email: "",
@@ -129,10 +131,7 @@ const CreateUser = ({
             handleChange(e, "role");
           }}
           popupMatchSelectWidth={false}
-          options={[
-            { label: "Admin", value: "ADMIN" },
-            { label: "User", value: "USER" },
-          ]}
+          options={clusterRoles}
         />
       </InputGroup>
       <Button type="submit" full={false}>

@@ -1,1 +1,1 @@
-export { default } from "./FlipOverCard";
+export { default } from './FlipOverCard'

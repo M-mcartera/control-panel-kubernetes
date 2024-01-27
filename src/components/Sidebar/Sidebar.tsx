@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { ArrowUndoOutline } from "react-ionicons";
-import { useLocation, useNavigate } from "react-router-dom";
-import useSidebar from "../../hooks/useSidebar";
-import { sidebarData } from "./sidebarData";
+import { useEffect, useState } from 'react'
+import { ArrowUndoOutline } from 'react-ionicons'
+import { useLocation, useNavigate } from 'react-router-dom'
+import useSidebar from '../../hooks/useSidebar'
+import { useSidebarData } from './useSidebarData'
 import {
   Menu,
   MenuItem,
@@ -11,52 +11,53 @@ import {
   SidebarDiv,
   Toggle,
   Header,
-} from "./styles";
+} from './styles'
 
 export const SidebarItem: React.FC<{
-  icon: React.ReactNode;
-  text: string;
-  active: boolean;
-  onClick: () => void;
+  icon: React.ReactNode
+  text: string
+  active: boolean
+  onClick: () => void
 }> = ({ icon, text, active, onClick }) => (
   <MenuItem active={active} onClick={onClick}>
     <MenuItemIcon>{icon}</MenuItemIcon>
     <MenuItemText>{text}</MenuItemText>
   </MenuItem>
-);
+)
 
 const SideBar = () => {
-  const [activeItem, setActiveItem] = useState(0); // [1
-  const { open, setOpen } = useSidebar();
-  const navigate = useNavigate();
+  const [activeItem, setActiveItem] = useState(0) // [1
+  const { open, setOpen } = useSidebar()
+  const navigate = useNavigate()
 
   const handleToggle = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
   const handleItemClick = (index: number) => {
-    setActiveItem(index);
-  };
+    setActiveItem(index)
+  }
 
   const handleNavigate = (path: string) => {
-    navigate(path);
-  };
+    navigate(path)
+  }
 
-  const data = sidebarData({ handleItemClick, handleNavigate, activeItem });
+  const data = useSidebarData({ handleItemClick, handleNavigate, activeItem })
 
-  const location = useLocation();
-  const path = location.pathname;
+  const location = useLocation()
+  const path = location.pathname
+
   useEffect(() => {
-    if (path.includes("settings")) {
-      setActiveItem(2);
+    if (path.includes('settings')) {
+      setActiveItem(2)
     }
-    if (path.includes("home")) {
-      setActiveItem(0);
+    if (path.includes('home')) {
+      setActiveItem(0)
     }
-    if (path.includes("resources")) {
-      setActiveItem(1);
+    if (path.includes('resources')) {
+      setActiveItem(1)
     }
-  }, [path]);
+  }, [path])
 
   return (
     <>
@@ -64,9 +65,9 @@ const SideBar = () => {
         isOpen={open}
         onClick={() => {
           if (open) {
-            return;
+            return
           }
-          handleToggle();
+          handleToggle()
         }}
       >
         <Header>
@@ -74,14 +75,10 @@ const SideBar = () => {
             <ArrowUndoOutline color="#fff" />
           </Toggle>
         </Header>
-        <Menu>
-          {data.map((item, index) => {
-            return item;
-          })}
-        </Menu>
+        <Menu>{data.map((item) => item)}</Menu>
       </SidebarDiv>
     </>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar

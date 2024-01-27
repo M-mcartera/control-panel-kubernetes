@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { Card, GoArrow, GoCorner } from "./style";
+import { useNavigate } from 'react-router-dom'
+import { Card, GoArrow, GoCorner } from './style'
 
 const GlassmorphicCard = ({
   title,
   content,
   link,
 }: {
-  title: string | React.ReactNode;
-  content: string;
-  link: string;
+  title: string | React.ReactNode
+  content: string
+  link: string
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <Card
       onClick={() => {
-        navigate(link);
+        navigate(link)
       }}
     >
       <h3>{title}</h3>
@@ -24,7 +24,7 @@ const GlassmorphicCard = ({
         <GoArrow> → </GoArrow>
       </GoCorner>
     </Card>
-  );
-};
+  )
+}
 
-export default GlassmorphicCard;
+export default GlassmorphicCard

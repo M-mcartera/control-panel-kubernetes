@@ -1,23 +1,21 @@
-import { publicAxios } from "../api/axios";
-import useAuth from "./useAuth";
+import { publicAxios } from '../api/axios'
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
   const refresh = async () => {
     try {
-      const response = await publicAxios.get("/auth/refresh", {
+      const response = await publicAxios.get('/auth/refresh', {
         withCredentials: true,
-      });
-      const { access_token = "" } = response.data;
-      setAuth((prev: any) => {
-        return { ...prev, token: access_token };
-      });
-      return access_token;
+      })
+      const { access_token = '' } = response.data
+      // setAuth((prev: AuthenticatedUser) => {
+      //   return { ...prev, token: access_token };
+      // });
+      return access_token
     } catch {
-      console.log("use refresh token error");
+      console.log('use refresh token error')
     }
-  };
-  return refresh;
-};
+  }
+  return refresh
+}
 
-export default useRefreshToken;
+export default useRefreshToken

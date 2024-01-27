@@ -1,110 +1,109 @@
-import { Input } from "antd";
-import { useEffect, useState } from "react";
-import Button from "../../../../../components/Button";
-import { ErrorMessage } from "../../../../../components/globalComponents";
-import InputGroup from "../../../../../components/InputGroup";
-import { debounce, isEmpty } from "lodash";
-import useAxiosPrivate from "../../../../../hooks/useAxiosPrivate";
-import { toast } from "react-toastify";
-import { AxiosError } from "axios";
+import { Input } from 'antd'
+import { useEffect, useState } from 'react'
+import Button from '../../../../../components/Button'
+import { ErrorMessage } from '../../../../../components/globalComponents'
+import InputGroup from '../../../../../components/InputGroup'
+import { isEmpty } from 'lodash'
+import useAxiosPrivate from '../../../../../hooks/useAxiosPrivate'
+import { toast } from 'react-toastify'
+import { AxiosError } from 'axios'
 
 interface CreateNamespaceProps {
-  resetModal: () => void;
-  refetchNamespaces: () => void;
-  modalClosed: boolean;
+  resetModal: () => void
+  refetchNamespaces: () => void
+  modalClosed: boolean
 }
 const CreateNamespace = ({
   resetModal,
   refetchNamespaces,
   modalClosed,
 }: CreateNamespaceProps) => {
-  const [namespaceName, setNamespaceName] = useState<string>("");
+  const [namespaceName, setNamespaceName] = useState<string>('')
   const [errors, setErrors] = useState<{ namespace: string }>({
-    namespace: "",
-  });
+    namespace: '',
+  })
 
-  const axiosPrivate = useAxiosPrivate();
+  const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
+    const validateNamespace = async () => {
+      try {
+        const { data: validationResponse } = await axiosPrivate.get(
+          `/kubernetes/validateNamespace?name=${namespaceName}`,
+        )
+        if (!validationResponse.data.success) {
+          setErrors({ namespace: 'Namespace already exists' })
+          return
+        }
+        return
+      } catch (err) {
+        const error = err as AxiosError
+        setErrors({ namespace: error.message })
+      }
+    }
+
     const delayDebounceFn = setTimeout(() => {
       if (namespaceName) {
-        validateNamespace();
+        validateNamespace()
       }
-    }, 500); // Adjust the debounce delay as needed (in milliseconds)
+    }, 500)
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [namespaceName]);
+    return () => clearTimeout(delayDebounceFn)
+  }, [axiosPrivate, namespaceName])
 
   useEffect(() => {
     if (modalClosed) {
-      setNamespaceName("");
+      setNamespaceName('')
     }
-  }, [modalClosed]);
+  }, [modalClosed])
 
   const handleSubmit = async () => {
     if (isEmpty(namespaceName)) {
-      setErrors({ namespace: "Namespace name is required" });
-      return;
+      setErrors({ namespace: 'Namespace name is required' })
+      return
     }
-    const namespaceRegex = /^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/;
+    const namespaceRegex = /^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/
     if (!namespaceRegex.test(namespaceName)) {
-      setErrors({ namespace: "Namespace name is invalid" });
-      return;
+      setErrors({ namespace: 'Namespace name is invalid' })
+      return
     }
 
     if (!isEmpty(errors.namespace)) {
-      return;
+      return
     }
 
     try {
       const { data: createdNamespace } = await axiosPrivate.post(
-        "/kubernetes/namespaces",
+        '/kubernetes/namespaces',
         {
           name: namespaceName,
-        }
-      );
+        },
+      )
       if (createdNamespace) {
-        toast.success("Namespace created successfully");
-        setErrors({ namespace: "" });
-        resetModal();
-        refetchNamespaces();
-        setNamespaceName("");
+        toast.success('Namespace created successfully')
+        setErrors({ namespace: '' })
+        resetModal()
+        refetchNamespaces()
+        setNamespaceName('')
       }
     } catch (err) {
-      const error = err as AxiosError;
-      toast.error(error.message);
+      const error = err as AxiosError
+      toast.error(error.message)
     }
-  };
-
-  const validateNamespace = async () => {
-    try {
-      const { data: validationResponse } = await axiosPrivate.get(
-        `/kubernetes/validateNamespace?name=${namespaceName}`
-      );
-      console.log({ validationResponse });
-      if (!validationResponse.data.success) {
-        setErrors({ namespace: "Namespace already exists" });
-        return;
-      }
-      return;
-    } catch (err) {
-      const error = err as AxiosError;
-      setErrors({ namespace: error.message });
-    }
-  };
+  }
 
   const handleNamespaceChange = (value: string) => {
     if (!isEmpty(errors.namespace)) {
-      setErrors({ namespace: "" });
+      setErrors({ namespace: '' })
     }
-    setNamespaceName(value);
-  };
+    setNamespaceName(value)
+  }
 
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
+        e.preventDefault()
+        handleSubmit()
       }}
     >
       <InputGroup>
@@ -124,7 +123,7 @@ const CreateNamespace = ({
         Create
       </Button>
     </form>
-  );
-};
+  )
+}
 
-export default CreateNamespace;
+export default CreateNamespace

@@ -1,5 +1,5 @@
-import BackButton from "../BackButton";
-import { Container, Title } from "./style";
+import BackButton from '../BackButton'
+import { Container, Title } from './style'
 
 const ModuleTitle = ({
   title,
@@ -7,14 +7,14 @@ const ModuleTitle = ({
   backButtonPath,
   backButtonOnClick,
 }: {
-  title?: string;
-  hideButton?: boolean;
-  backButtonPath?: string;
-  backButtonOnClick?: () => void;
+  title?: string
+  hideButton?: boolean
+  backButtonPath?: string
+  backButtonOnClick?: () => void
 }) => {
   return (
     <Container>
-      <Title>{title ?? "Module title"}</Title>
+      <Title>{title ?? 'Module title'}</Title>
       {hideButton ? null : (
         <BackButton
           onClick={backButtonOnClick}
@@ -22,7 +22,7 @@ const ModuleTitle = ({
         ></BackButton>
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default ModuleTitle;
+export default ModuleTitle

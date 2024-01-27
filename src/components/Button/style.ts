@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 export const StyledButton = styled.button`
   width: 100%;
   min-width: 64px;
@@ -17,4 +17,4 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: #0072ff;
   }
-`;
+`

@@ -1,23 +1,22 @@
-import { EllipsisOutlined } from "@ant-design/icons";
-import { Table, TableProps } from "antd";
-import { ColumnsType } from "antd/lib/table";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { User } from "./Users/types";
+import { EllipsisOutlined } from '@ant-design/icons'
+import { Table, TableProps } from 'antd'
+import { ColumnsType } from 'antd/lib/table'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
   background-color: #fbfbfb;
-`;
+`
 
 export const PageHeader = styled(Link)`
   font-size: 2rem;
   font-weight: 600;
   margin: 40px 0;
   color: inherit;
-`;
+`
 
 export const ErrorMessage = styled.span`
   display: block !important;
@@ -25,7 +24,7 @@ export const ErrorMessage = styled.span`
   color: red !important;
   font-size: 0.875rem !important;
   margin-top: 0 !important;
-`;
+`
 
 export const ActionsList = styled.div`
   display: flex;
@@ -45,7 +44,7 @@ export const ActionsList = styled.div`
       background-color: #0072ff;
     }
   }
-`;
+`
 
 export const ActionsElipsis = styled(EllipsisOutlined)`
   font-size: 20px;
@@ -55,7 +54,7 @@ export const ActionsElipsis = styled(EllipsisOutlined)`
   &:hover {
     color: black;
   }
-`;
+`
 
 export const FooterButtons = styled.div`
   width: 80%;
@@ -77,23 +76,23 @@ export const FooterButtons = styled.div`
       background-color: #0072ff;
     }
   }
-`;
+`
 
 export const PageLayout = styled.div<{ open: boolean }>`
-  width: ${({ open }) => (open ? "calc(100% - 250px)" : "calc(100% - 50px)")};
+  width: ${({ open }) => (open ? 'calc(100% - 250px)' : 'calc(100% - 50px)')};
   height: 100vh;
   padding: 1rem;
-  margin: ${({ open }) => (open ? "0 0 0 220px" : "0 0 0 50px")};
+  margin: ${({ open }) => (open ? '0 0 0 220px' : '0 0 0 50px')};
   transition: all 0.6s ease;
-`;
+`
 
 export const Wrapper = styled.div`
   background: #e4e9f7;
   overflow: auto;
-`;
+`
 
 interface StyledTableProps<T> extends TableProps<T> {
-  columns: ColumnsType<any>;
+  columns: ColumnsType<any>
 }
 
 export const StyledTable = styled(Table)<StyledTableProps<any>>`
@@ -123,4 +122,4 @@ export const StyledTable = styled(Table)<StyledTableProps<any>>`
       background: #e4e9f7 !important;
     }
   }
-`;
+`

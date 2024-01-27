@@ -1,64 +1,53 @@
-import { CopyOutline } from "react-ionicons";
-import { useNavigate } from "react-router-dom";
-import { Wrap } from "../../components/DefaultButton/style";
-import FlipOverCard from "../../components/FlipOverCard";
-import ModuleTitle from "../../components/ModuleTitle";
-import { CardsContainer, Wrapper } from "./style";
-const Resources = () => {
-  const navigate = useNavigate();
+import ModuleTitle from '../../components/ModuleTitle'
+import { Wrapper } from './style'
+import { Tabs } from 'antd'
+import { useResourceData } from './routing'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
 
-  const array = [0, 1, 2, 3, 4, 5, 6];
-  const cardsRepresentation = [
-    {
-      title: "Namespaces",
-      description:
-        "Kubernetes namespaces are virtual clusters that enable resource isolation and logical separation within a Kubernetes cluster",
-      onClick: () => {
-        navigate("namespaces");
-      },
-    },
-    {
-      title: "Namespaces",
-      description:
-        "Kubernetes namespaces are virtual clusters that enable resource isolation and logical separation within a Kubernetes cluster",
-      onClick: () => {
-        navigate("namespaces");
-      },
-    },
-    {
-      title: "Namespaces",
-      description:
-        "Kubernetes namespaces are virtual clusters that enable resource isolation and logical separation within a Kubernetes cluster",
-      onClick: () => {
-        navigate("namespaces");
-      },
-    },
-    {
-      title: "Namespaces",
-      description:
-        "Kubernetes namespaces are virtual clusters that enable resource isolation and logical separation within a Kubernetes cluster",
-      onClick: () => {
-        navigate("namespaces");
-      },
-    },
-  ];
+const verticalTabBarStyle = {
+  background: '#ffffff',
+  color: '#333333',
+  borderRight: '1px solid #e8e8e8',
+  padding: '10px',
+}
+
+const Resources = () => {
+  const [key, setKey] = useState<number>(0)
+  const tabsItems = useResourceData()
+  const { tab, resourceId } = useParams()
+  const navigate = useNavigate()
+
+  const handleTabChange = (key: string) => {
+    navigate(`/resources/${key}`)
+    setKey((prevState: number) => prevState + 1)
+  }
+
+  const handleBackButtonClick = () => {
+    if (resourceId) {
+      navigate(`/resources/${tab}`)
+    }
+  }
+
   return (
     <>
-      <ModuleTitle title="Resources Module" hideButton={true} />
+      <ModuleTitle
+        title="Resources Module"
+        hideButton={!resourceId}
+        backButtonOnClick={handleBackButtonClick}
+      />
       <Wrapper>
-        <CardsContainer>
-          {cardsRepresentation.map((card) => {
-            return (
-              <FlipOverCard
-                title={card.title}
-                description={card.description}
-                onClick={card.onClick}
-              />
-            );
-          })}
-        </CardsContainer>
+        <Tabs
+          defaultActiveKey={tab}
+          key={key}
+          items={tabsItems}
+          onChange={handleTabChange}
+          tabPosition="left"
+          size="large"
+          tabBarStyle={verticalTabBarStyle}
+        />
       </Wrapper>
     </>
-  );
-};
-export default Resources;
+  )
+}
+export default Resources

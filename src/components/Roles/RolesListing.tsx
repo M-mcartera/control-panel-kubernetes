@@ -1,97 +1,96 @@
-import { Dropdown, MenuProps, Modal } from "antd";
-import { ColumnsType } from "antd/es/table";
-import dayjs from "dayjs";
-import { useState, ReactNode, useEffect } from "react";
-import { Create } from "react-ionicons";
-import { toast } from "react-toastify";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import DefaultButton from "../DefaultButton";
-import { ActionsElipsis, StyledTable } from "../globalComponents";
-import ModuleTitle from "../ModuleTitle";
-import CreateRoleComponent from "./CreateRoleComponent";
-import { Role } from "./types";
+import { Dropdown, MenuProps, Modal } from 'antd'
+import { ColumnsType } from 'antd/es/table'
+import dayjs from 'dayjs'
+import { useState, ReactNode, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+import DefaultButton from '../DefaultButton'
+import { ActionsElipsis, StyledTable } from '../globalComponents'
+import ModuleTitle from '../ModuleTitle'
+import CreateRoleComponent from './CreateRoleComponent'
+import { Role } from './types'
 
 const RolesListing = () => {
-  const [modalTitle, setModalTitle] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode>(null);
-  const [data, setData] = useState<Role[]>([]);
-  const axiosPrivate = useAxiosPrivate();
-  const [selectedRole, setSelectedRole] = useState<Role>({} as Role);
-  const [firstRender, setFirstRender] = useState<boolean>(true);
-  const [trigger, setTrigger] = useState<boolean>(false);
+  const [modalTitle, setModalTitle] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalContent, setModalContent] = useState<ReactNode>(null)
+  const [data, setData] = useState<Role[]>([])
+  const axiosPrivate = useAxiosPrivate()
+  const [selectedRole, setSelectedRole] = useState<Role>({} as Role)
+  const [firstRender, setFirstRender] = useState<boolean>(true)
+  const [trigger, setTrigger] = useState<boolean>(false)
   useEffect(() => {
     if (firstRender || trigger) {
-      (async () => {
+      ;(async () => {
         try {
-          const { data: rolesResponse } = await axiosPrivate.get("/roles");
+          const { data: rolesResponse } = await axiosPrivate.get('/roles')
           setData(
             rolesResponse.data.map((role: Role, index: number) => {
-              return { ...role, index: index + 1 };
-            })
-          );
+              return { ...role, index: index + 1 }
+            }),
+          )
 
-          setFirstRender(false);
-          setTrigger(false);
+          setFirstRender(false)
+          setTrigger(false)
         } catch (err) {
-          console.log({ err });
+          console.log({ err })
         }
-      })();
+      })()
     }
-  }, [firstRender, trigger]);
+  }, [axiosPrivate, firstRender, trigger])
 
   const resetModal = () => {
-    setModalContent(null);
-    setModalTitle("");
-    setIsModalOpen(false);
-    setSelectedRole({} as Role);
-  };
+    setModalContent(null)
+    setModalTitle('')
+    setIsModalOpen(false)
+    setSelectedRole({} as Role)
+  }
 
   const handleDeleteRole = async (role: Role) => {
     try {
-      const { _id } = role;
-      await axiosPrivate.delete(`/roles/${_id}`);
-      toast.success("Role deleted successfully!");
-      setTrigger(true);
+      const { _id } = role
+      await axiosPrivate.delete(`/roles/${_id}`)
+      toast.success('Role deleted successfully!')
+      setTrigger(true)
     } catch (err) {
-      toast.error("Error deleting role");
+      toast.error('Error deleting role')
     }
-  };
+  }
 
   const handleNewRole = () => {
-    setModalTitle("Create new role");
+    setModalTitle('Create new role')
     setModalContent(
       <CreateRoleComponent
         closeModal={() => resetModal()}
         refetchRoles={() => setTrigger(true)}
         isEdit={false}
         role={{} as Role}
-      />
-    );
-    setIsModalOpen(true);
-  };
+      />,
+    )
+    setIsModalOpen(true)
+  }
 
   const handleEditRole = () => {
-    setModalTitle(`Edit role ${selectedRole.roleName}`);
+    setModalTitle(`Edit role ${selectedRole.roleName}`)
     setModalContent(
       <CreateRoleComponent
         closeModal={() => resetModal()}
         isEdit={true}
         refetchRoles={() => setTrigger(true)}
         role={selectedRole}
-      />
-    );
-    setIsModalOpen(true);
-  };
+      />,
+    )
+    setIsModalOpen(true)
+  }
 
-  const items: MenuProps["items"] = [
+  const items: MenuProps['items'] = [
     {
-      key: "1",
+      key: '1',
       label: (
         <span
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           onClick={() => {
-            handleEditRole();
+            handleEditRole()
           }}
         >
           Edit
@@ -99,69 +98,79 @@ const RolesListing = () => {
       ),
     },
     {
-      key: "3",
+      key: '3',
       label: (
         <span
           onClick={() => {
-            handleDeleteRole(selectedRole);
+            handleDeleteRole(selectedRole)
           }}
         >
           Delete
         </span>
       ),
     },
-  ];
+  ]
 
   const columns = [
     {
-      title: "Id",
-      dataIndex: "index",
-      key: "id",
+      title: 'Id',
+      dataIndex: 'index',
+      key: 'id',
     },
     {
-      title: "Role name",
-      dataIndex: "roleName",
-      key: "roleName",
+      title: 'Role name',
+      dataIndex: 'roleName',
+      key: 'roleName',
     },
     {
-      title: "Role description",
-      dataIndex: "roleDescription",
-      key: "roleDescription",
+      title: 'Role description',
+      dataIndex: 'roleDescription',
+      key: 'roleDescription',
     },
     {
-      title: "Users in role",
-      dataIndex: "usersInRole",
-      key: "username",
+      title: 'Users in role',
+      dataIndex: 'usersInRole',
+      key: 'username',
+      render: (username: string[]) => {
+        return (
+          <span>
+            {username.reduce(
+              (text, value, i, array) =>
+                text + (i < array.length - 1 ? ', ' : ' and ') + value,
+            )}
+          </span>
+        )
+      },
     },
     {
-      title: "Created at",
-      dataIndex: "createdAt",
-      key: "createdAt",
+      title: 'Created at',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       render: (createdAt: Date) => (
-        <span>{dayjs(createdAt).format("YYYY-MM-DD HH:mm:ss")}</span>
+        <span>{dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss')}</span>
       ),
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: 'Actions',
+      key: 'actions',
       render: (_: any, row: Role) => {
         return (
           <Dropdown
             menu={{ items }}
             onOpenChange={(val) => {
               if (val) {
-                setSelectedRole(row);
+                setSelectedRole(row)
               } else {
-                setSelectedRole({} as Role);
+                setSelectedRole({} as Role)
               }
             }}
           >
             <ActionsElipsis />
           </Dropdown>
-        );
+        )
       },
     },
-  ] as ColumnsType<any>;
+  ] as ColumnsType<any>
 
   return (
     <>
@@ -170,7 +179,7 @@ const RolesListing = () => {
       <StyledTable
         columns={columns}
         dataSource={data}
-        rowClassName={() => "custom-row"}
+        rowClassName={() => 'custom-row'}
       />
       <Modal
         width="80%"
@@ -180,16 +189,16 @@ const RolesListing = () => {
         maskClosable={false}
         centered
         onOk={() => {
-          setIsModalOpen(false);
+          setIsModalOpen(false)
         }}
         onCancel={() => {
-          resetModal();
+          resetModal()
         }}
       >
         {modalContent}
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default RolesListing;
+export default RolesListing

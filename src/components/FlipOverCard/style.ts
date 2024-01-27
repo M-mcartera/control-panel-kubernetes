@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Bar = styled.div`
   position: absolute;
@@ -6,13 +6,13 @@ export const Bar = styled.div`
   left: 20px;
   height: 5px;
   width: 150px;
-`;
+`
 
 export const EmptyBar = styled.div`
   background-color: #2e3033;
   width: 100%;
   height: 100%;
-`;
+`
 
 export const FilledBar = styled.div`
   position: absolute;
@@ -28,7 +28,7 @@ export const FilledBar = styled.div`
     rgba(255, 186, 0, 1) 100%
   );
   transition: 0.6s ease-out;
-`;
+`
 export const Description = styled.div`
   color: #17141d;
   font-weight: 300;
@@ -40,7 +40,7 @@ export const Description = styled.div`
   opacity: 0;
   display: none;
   font-size: 10pt;
-`;
+`
 
 export const Card = styled.div`
   cursor: pointer;
@@ -84,11 +84,11 @@ export const Card = styled.div`
       transition: 0.6 ease;
     }
   }
-`;
+`
 export const Title = styled.div`
   color: white;
   font-weight: 300;
   position: absolute;
   left: 20px;
   top: 15px;
-`;
+`

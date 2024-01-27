@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Wrap = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 export const StyledButton = styled.button`
   width: 100%;
@@ -21,7 +21,7 @@ export const StyledButton = styled.button`
   transition: all 0.3s ease;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: -100%;
@@ -49,4 +49,4 @@ export const StyledButton = styled.button`
     transform: scale(0.95);
     box-shadow: none;
   }
-`;
+`

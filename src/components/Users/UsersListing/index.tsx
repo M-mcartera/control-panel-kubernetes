@@ -1,96 +1,95 @@
-import { useContext, useEffect, useState } from "react";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { User } from "../types";
-import { Dropdown, MenuProps, Table } from "antd";
+import { useContext, useEffect, useState } from 'react'
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
+import { User } from '../types'
+import { Dropdown, MenuProps } from 'antd'
 import {
   ActionsElipsis,
   FooterButtons,
   StyledTable,
-} from "../../globalComponents";
-import { Modal } from "antd";
-import HandleUser from "../HandleUser/HandleUser";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { toast } from "react-toastify";
-import DefaultButton from "../../DefaultButton";
-import { ColumnsType } from "antd/lib/table";
-import ModuleTitle from "../../ModuleTitle";
-import SocketContext from "../../../context/SocketContext/SocketContext";
-import { Role } from "../../Roles/types";
+} from '../../globalComponents'
+import { Modal } from 'antd'
+import HandleUser from '../HandleUser/HandleUser'
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { toast } from 'react-toastify'
+import DefaultButton from '../../DefaultButton'
+import { ColumnsType } from 'antd/lib/table'
+import ModuleTitle from '../../ModuleTitle'
+import SocketContext from '../../../context/SocketContext/SocketContext'
+import { Role } from '../../Roles/types'
 
 export type UserCreatePayload = {
-  email: string;
-  username: string;
-  password: string;
-  role: "ADMIN" | "USER";
-};
+  email: string
+  username: string
+  password: string
+  role: 'ADMIN' | 'USER'
+}
 
 export type RoleOptionsType = {
-  value: string;
-  label: string;
-};
+  value: string
+  label: string
+}
 const UsersListing = () => {
-  const axiosPrivate = useAxiosPrivate();
+  const axiosPrivate = useAxiosPrivate()
 
-  const [data, setData] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User>({} as User);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalTitle, setModalTitle] = useState<string>("");
-  const [modalContent, setModalContent] = useState<React.ReactNode>(null);
-  const [trigger, setTrigger] = useState<boolean>(false);
-  const [firstRender, setFirstRender] = useState<boolean>(true);
-  const [clusterRoles, setClusterRoles] = useState<RoleOptionsType[]>([]);
+  const [data, setData] = useState<User[]>([])
+  const [selectedUser, setSelectedUser] = useState<User>({} as User)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [modalTitle, setModalTitle] = useState<string>('')
+  const [modalContent, setModalContent] = useState<React.ReactNode>(null)
+  const [trigger, setTrigger] = useState<boolean>(false)
+  const [firstRender, setFirstRender] = useState<boolean>(true)
+  const [clusterRoles, setClusterRoles] = useState<RoleOptionsType[]>([])
 
-  const { socket } = useContext(SocketContext);
+  const { socket } = useContext(SocketContext)
 
   useEffect(() => {
-    socket?.on("message", (data: any) => {
-      console.log(data);
-    });
-  }, [socket]);
+    socket?.on('message', (data: any) => {
+      console.log(data)
+    })
+  }, [socket])
 
   useEffect(() => {
     if (firstRender || trigger) {
-      (async () => {
+      ;(async () => {
         try {
-          const response = await axiosPrivate.get("/users");
-          const users = response.data.data;
+          const response = await axiosPrivate.get('/users')
+          const users = response.data.data
           setData(
-            users.map((u: any, index: number) => ({ ...u, index: index + 1 }))
-          );
-          setFirstRender(false);
-          setTrigger(false);
+            users.map((u: any, index: number) => ({ ...u, index: index + 1 })),
+          )
+          setFirstRender(false)
+          setTrigger(false)
         } catch (error) {
-          console.log({ error });
+          console.log({ error })
         }
-      })();
+      })()
     }
-  }, [trigger, firstRender]);
+  }, [trigger, firstRender, axiosPrivate])
 
   useEffect(() => {
-    (async () => {
-      const response = await axiosPrivate.get("/roles");
-      const roles: Role[] = response.data.data;
+    ;(async () => {
+      const response = await axiosPrivate.get('/roles')
+      const roles: Role[] = response.data.data
       setClusterRoles(
-        roles.map((role: Role) => ({ value: role._id, label: role.roleName }))
-      );
-    })();
-  }, []);
-
+        roles.map((role: Role) => ({ value: role._id, label: role.roleName })),
+      )
+    })()
+  }, [axiosPrivate])
 
   const resetModal = () => {
-    setModalContent(null);
-    setModalTitle("");
-    setIsModalOpen(false);
-  };
+    setModalContent(null)
+    setModalTitle('')
+    setIsModalOpen(false)
+  }
 
-  const items: MenuProps["items"] = [
+  const items: MenuProps['items'] = [
     {
-      key: "1",
+      key: '1',
       label: (
         <span
-          style={{ width: "100%" }}
+          style={{ width: '100%' }}
           onClick={() => {
-            handleEditUser();
+            handleEditUser()
           }}
         >
           Edit
@@ -98,11 +97,11 @@ const UsersListing = () => {
       ),
     },
     {
-      key: "2",
+      key: '2',
       label: (
         <span
           onClick={() => {
-            handleModalResendInvitation();
+            handleModalResendInvitation()
           }}
         >
           Resend Invitation
@@ -110,68 +109,68 @@ const UsersListing = () => {
       ),
     },
     {
-      key: "3",
+      key: '3',
       label: (
         <span
           onClick={() => {
-            handleModalDeleteUser();
+            handleModalDeleteUser()
           }}
         >
           Delete
         </span>
       ),
     },
-  ];
+  ]
 
   const columns = [
     {
-      title: "Id",
-      dataIndex: "index",
-      key: "id",
+      title: 'Id',
+      dataIndex: 'index',
+      key: 'id',
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: 'Role',
+      dataIndex: 'role',
+      key: 'role',
     },
     {
-      title: "Active",
-      key: "active",
+      title: 'Active',
+      key: 'active',
       render: (_: any, row: User) => {
         return (
           <span>
             {row.active ? (
               <CheckCircleOutlined
-                style={{ color: "green", fontSize: "24px" }}
+                style={{ color: 'green', fontSize: '24px' }}
               />
             ) : (
-              <CloseCircleOutlined style={{ color: "red", fontSize: "24px" }} />
+              <CloseCircleOutlined style={{ color: 'red', fontSize: '24px' }} />
             )}
           </span>
-        );
+        )
       },
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: 'Actions',
+      key: 'actions',
       render: (_: any, row: User) => (
         <Dropdown
           menu={{ items }}
           onOpenChange={(val) => {
             if (val) {
-              setSelectedUser(row);
+              setSelectedUser(row)
             } else {
-              setSelectedUser({} as User);
+              setSelectedUser({} as User)
             }
           }}
         >
@@ -179,148 +178,148 @@ const UsersListing = () => {
         </Dropdown>
       ),
     },
-  ] as ColumnsType<any>;
+  ] as ColumnsType<any>
 
   const handleCreateUser = async (payload: UserCreatePayload) => {
     try {
-      const response = await axiosPrivate.post("/users/invite", payload);
-      toast.success("User created successfully");
-      setTrigger(true);
-      resetModal();
+      await axiosPrivate.post('/users/invite', payload)
+      toast.success('User created successfully')
+      setTrigger(true)
+      resetModal()
     } catch (err) {
-      toast.error("Something went wrong");
-      console.log({ err });
+      toast.error('Something went wrong')
+      console.log({ err })
     }
-  };
+  }
 
   const handleUpdateUser = async (payload: UserCreatePayload) => {
     try {
-      const id = selectedUser._id;
-      const response = await axiosPrivate.put(`users/${id}`, payload);
-      toast.success("User updated successfully");
-      setTrigger(true);
-      resetModal();
+      const id = selectedUser._id
+      await axiosPrivate.put(`users/${id}`, payload)
+      toast.success('User updated successfully')
+      setTrigger(true)
+      resetModal()
     } catch (err) {
-      toast.error("Something went wrong");
-      console.log({ err });
+      toast.error('Something went wrong')
+      console.log({ err })
     }
-  };
+  }
 
   const handleAddNewUser = () => {
-    setModalTitle("Add new user");
+    setModalTitle('Add new user')
     setModalContent(
       <HandleUser
         onSubmit={(data: UserCreatePayload) => {
-          handleCreateUser(data);
+          handleCreateUser(data)
         }}
-        buttonName={"Inivte User"}
+        buttonName={'Inivte User'}
         clusterRoles={clusterRoles}
-      />
-    );
-    setIsModalOpen(true);
-  };
+      />,
+    )
+    setIsModalOpen(true)
+  }
 
   const handleEditUser = () => {
-    setIsModalOpen(true);
-    setModalTitle(`Edit User: ${selectedUser.email}`);
+    setIsModalOpen(true)
+    setModalTitle(`Edit User: ${selectedUser.email}`)
     setModalContent(
       <HandleUser
         user={selectedUser}
         onSubmit={(data: UserCreatePayload) => {
-          handleUpdateUser(data);
+          handleUpdateUser(data)
         }}
-        buttonName={"Update User"}
+        buttonName={'Update User'}
         clusterRoles={clusterRoles}
-      />
-    );
-  };
+      />,
+    )
+  }
 
   const deleteUser = async () => {
     try {
-      const id = selectedUser._id;
-      const response = await axiosPrivate.delete(`users/${id}`);
-      toast.success("User deleted successfully");
-      setTrigger(true);
-      resetModal();
+      const id = selectedUser._id
+      await axiosPrivate.delete(`users/${id}`)
+      toast.success('User deleted successfully')
+      setTrigger(true)
+      resetModal()
     } catch (err) {
-      toast.error("Something went wrong");
-      console.log({ err });
+      toast.error('Something went wrong')
+      console.log({ err })
     }
-  };
+  }
   const handleModalDeleteUser = () => {
-    setIsModalOpen(true);
-    setModalTitle(`Are you sure you want to delete ${selectedUser.email}?`);
+    setIsModalOpen(true)
+    setModalTitle(`Are you sure you want to delete ${selectedUser.email}?`)
     setModalContent(
       <FooterButtons>
         <span
           onClick={() => {
-            resetModal();
+            resetModal()
           }}
         >
           No
         </span>
         <span
           onClick={() => {
-            deleteUser();
+            deleteUser()
           }}
         >
           Yes
         </span>
-      </FooterButtons>
-    );
-  };
+      </FooterButtons>,
+    )
+  }
 
   const resendInvitation = async () => {
     try {
-      const id = selectedUser._id;
-      const response = await axiosPrivate.post(`users/${id}/resend-invitation`);
-      toast.success("Invitation sent successfully");
-      setTrigger(true);
-      resetModal();
+      const id = selectedUser._id
+      await axiosPrivate.post(`users/${id}/resend-invitation`)
+      toast.success('Invitation sent successfully')
+      setTrigger(true)
+      resetModal()
     } catch (err) {
-      toast.error("Something went wrong");
-      console.log({ err });
+      toast.error('Something went wrong')
+      console.log({ err })
     }
-  };
+  }
   const handleModalResendInvitation = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(true)
     setModalTitle(
-      `Are you sure you want to resend invitation to ${selectedUser.email}?`
-    );
+      `Are you sure you want to resend invitation to ${selectedUser.email}?`,
+    )
     setModalContent(
       <FooterButtons>
         <span
           onClick={() => {
-            resetModal();
+            resetModal()
           }}
         >
           No
         </span>
         <span
           onClick={() => {
-            resendInvitation();
+            resendInvitation()
           }}
         >
           Yes
         </span>
-      </FooterButtons>
-    );
-  };
+      </FooterButtons>,
+    )
+  }
   return (
     <div>
       <ModuleTitle title="Users Listing" backButtonPath="/settings" />
       <DefaultButton
         title="Create user"
         onClick={(e) => {
-          e.preventDefault();
-          handleAddNewUser();
+          e.preventDefault()
+          handleAddNewUser()
         }}
       />
 
       <StyledTable
         columns={columns}
         dataSource={data}
-        rowClassName={() => "custom-row"}
+        rowClassName={() => 'custom-row'}
       ></StyledTable>
       <Modal
         title={modalTitle}
@@ -329,16 +328,16 @@ const UsersListing = () => {
         maskClosable={false}
         centered
         onOk={() => {
-          setIsModalOpen(false);
+          setIsModalOpen(false)
         }}
         onCancel={() => {
-          resetModal();
+          resetModal()
         }}
       >
         {modalContent}
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default UsersListing;
+export default UsersListing

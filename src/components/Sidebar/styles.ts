@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 // import styled from "styled-components";
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 // export const Navbar = styled.div`
 //   display: flex;
@@ -79,33 +79,33 @@ export const Container = styled.div`
   & > * {
     transition: all 0.5s ease;
   }
-`;
+`
 
 export const SidebarDiv = styled.div<{ isOpen: boolean }>`
   position: fixed;
-  width: ${({ isOpen }) => (isOpen ? "200px" : "35px")};
+  width: ${({ isOpen }) => (isOpen ? '200px' : '35px')};
   height: 100vh;
   background-color: #fff;
   color: #fff;
-  padding: ${({ isOpen }) => (isOpen ? "20px" : "0")};
-  overflow: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  cursor: ${({ isOpen }) => (isOpen ? "auto" : "pointer")};
+  padding: ${({ isOpen }) => (isOpen ? '20px' : '0')};
+  overflow: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  cursor: ${({ isOpen }) => (isOpen ? 'auto' : 'pointer')};
   &:hover {
-    background-color: ${({ isOpen }) => (!isOpen ? "#e5e5e5" : "")};
+    background-color: ${({ isOpen }) => (!isOpen ? '#e5e5e5' : '')};
   }
   transition: all 0.5 ease;
-`;
+`
 
 export const Content = styled.div`
   flex: 1;
   padding: 20px;
-`;
+`
 
 export const Menu = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-`;
+`
 
 export const MenuItemIcon = styled.span`
   margin-right: 10px;
@@ -121,7 +121,7 @@ export const MenuItemIcon = styled.span`
     height: 15px !important;
     color: #b1b1b1;
   }
-`;
+`
 
 export const MenuItemText = styled.span`
   color: #b1b1b1;
@@ -129,12 +129,12 @@ export const MenuItemText = styled.span`
   font-weight: 500;
   white-space: nowrap;
   opacity: 1;
-`;
+`
 export const MenuItem = styled.li<{ active: boolean }>`
   margin-bottom: 10px;
   padding: 10px;
   cursor: pointer;
-  background-color: ${({ active }) => (active ? "#695cfe" : "transparent")};
+  background-color: ${({ active }) => (active ? '#695cfe' : 'transparent')};
   border-radius: 5px;
   transition: background-color 0.3s ease;
   display: flex;
@@ -154,7 +154,7 @@ export const MenuItem = styled.li<{ active: boolean }>`
       color: #fff;
     }
   }
-`;
+`
 
 export const Toggle = styled.div`
   cursor: pointer;
@@ -174,8 +174,8 @@ export const Toggle = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 export const Header = styled.div`
   position: relative;
-`;
+`

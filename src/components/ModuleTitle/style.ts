@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
-`;
+`
 
 export const Title = styled.h1`
   display: inline-block;
@@ -14,7 +14,7 @@ export const Title = styled.h1`
   margin: 0;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     transform: scaleX(0);
@@ -32,4 +32,4 @@ export const Title = styled.h1`
       transform-origin: bottom left;
     }
   }
-`;
+`

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const RolesWrapper = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const RolesWrapper = styled.div`
   justify-content: space-around;
   padding: 20px 0;
   box-sizing: border-box;
-`;
+`
 
 export const RoleBlock = styled.div`
   min-width: 200px;
@@ -14,4 +14,4 @@ export const RoleBlock = styled.div`
     list-style: none;
     padding-left: 30px;
   }
-`;
+`

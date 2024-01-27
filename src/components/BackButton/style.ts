@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledButton = styled.button`
   cursor: pointer;
@@ -34,7 +34,7 @@ export const StyledButton = styled.button`
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 2px;
     background: #272822;
@@ -50,7 +50,7 @@ export const StyledButton = styled.button`
     inset: 0;
     display: block;
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       width: 10px;
       height: 2px;
@@ -61,7 +61,7 @@ export const StyledButton = styled.button`
       transition: 0.2s;
     }
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       width: 10px;
       height: 2px;
@@ -96,4 +96,4 @@ export const StyledButton = styled.button`
       box-shadow: #27272c;
     }
   }
-`;
+`

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledInput = styled.input`
     width: 100%;
@@ -15,4 +15,4 @@ export const StyledInput = styled.input`
     &:focus {
         box-shadow: 0 0 0 2px rgb(169, 172, 255, 0.5);
     }
-`;
+`

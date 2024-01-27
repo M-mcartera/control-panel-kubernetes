@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Card = styled.div`
   cursor: pointer;
@@ -15,7 +15,7 @@ export const Card = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: -1;
     top: -16px;
@@ -62,7 +62,7 @@ export const Card = styled.div`
       color: #ffffff;
     }
   }
-`;
+`
 
 export const GoCorner = styled.div`
   display: flex;
@@ -76,10 +76,10 @@ export const GoCorner = styled.div`
   right: 0;
   background-color: #00838d;
   border-radius: 0 4px 0 32px;
-`;
+`
 export const GoArrow = styled.div`
   margin-top: -4px;
   margin-right: -4px;
   color: white;
   font-family: courier, sans-serif;
-`;
+`

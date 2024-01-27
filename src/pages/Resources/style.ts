@@ -1,17 +1,10 @@
-import styled from "styled-components";
-
-export const CardsContainer = styled.div`
-  position: relative;
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-`;
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-    width: 100%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;s
-`;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  height: auto;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+`

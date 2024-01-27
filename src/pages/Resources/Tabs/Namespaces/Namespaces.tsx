@@ -1,5 +1,5 @@
-import ModuleTitle from "../../../../components/ModuleTitle";
-import NamespacesListing from "./components/NamespacesListing";
+import ModuleTitle from '../../../../components/ModuleTitle'
+import NamespacesListing from './components/NamespacesListing'
 
 const Namespaces = () => {
   return (
@@ -7,7 +7,7 @@ const Namespaces = () => {
       <ModuleTitle title="Namespaces" backButtonPath="/resources" />
       <NamespacesListing />
     </>
-  );
-};
+  )
+}
 
-export default Namespaces;
+export default Namespaces

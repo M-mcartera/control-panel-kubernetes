@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { validateEmail } from "../../../helpers";
-import Button from "../../Button";
-import { ErrorMessage } from "../../globalComponents";
-import Input from "../../Input";
-import InputGroup from "../../InputGroup";
-import CustomSelect from "../../Select";
-import { User } from "../types";
-import { RoleOptionsType, UserCreatePayload } from "../UsersListing";
+import { useEffect, useState } from 'react'
+import { validateEmail } from '../../../helpers'
+import Button from '../../Button'
+import { ErrorMessage } from '../../globalComponents'
+import Input from '../../Input'
+import InputGroup from '../../InputGroup'
+import CustomSelect from '../../Select'
+import { User } from '../types'
+import { RoleOptionsType, UserCreatePayload } from '../UsersListing'
 interface CreateUserErrors {
-  email: string;
-  username: string;
-  role: string;
+  email: string
+  username: string
+  role: string
 }
 interface CreateUserFormData {
-  email: string;
-  username: string;
-  role: "ADMIN" | "USER" | null;
+  email: string
+  username: string
+  role: 'ADMIN' | 'USER' | null
 }
 
 const CreateUser = ({
@@ -24,75 +24,75 @@ const CreateUser = ({
   buttonName,
   clusterRoles,
 }: {
-  onSubmit: (payload: UserCreatePayload) => void;
-  user?: User;
-  buttonName: string;
-  clusterRoles: RoleOptionsType[];
+  onSubmit: (payload: UserCreatePayload) => void
+  user?: User
+  buttonName: string
+  clusterRoles: RoleOptionsType[]
 }) => {
   const [errors, setErrors] = useState<CreateUserErrors>({
-    email: "",
-    username: "",
-    role: "",
-  });
+    email: '',
+    username: '',
+    role: '',
+  })
   const [formData, setFormData] = useState<CreateUserFormData>({
-    email: user?.email || "",
-    username: user?.username || "",
+    email: user?.email || '',
+    username: user?.username || '',
     role: user?.role || null,
-  });
+  })
 
   const resetForm = () => {
     setFormData({
-      email: "",
-      username: "",
+      email: '',
+      username: '',
       role: null,
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     setFormData({
-      email: user?.email || "",
-      username: user?.username || "",
+      email: user?.email || '',
+      username: user?.username || '',
       role: user?.role || null,
-    });
-  }, [user]);
+    })
+  }, [user])
 
   const handleChange = (e: string, key: string) => {
-    setFormData((prevState) => ({ ...prevState, [key]: e }));
-  };
+    setFormData((prevState) => ({ ...prevState, [key]: e }))
+  }
 
   const handleSubmit = () => {
-    const { email, username, role } = formData;
-    const isValidEmail = validateEmail(email);
+    const { email, username, role } = formData
+    const isValidEmail = validateEmail(email)
     if (!isValidEmail) {
       setErrors((prev) => ({
         ...prev,
-        email: "Please enter a valid email address",
-      }));
-      return;
+        email: 'Please enter a valid email address',
+      }))
+      return
     }
     if (!username) {
       setErrors((prev) => ({
         ...prev,
-        username: "Please enter a username",
-      }));
-      return;
+        username: 'Please enter a username',
+      }))
+      return
     }
     if (!role) {
       setErrors((prev) => ({
         ...prev,
-        role: "Please select a role",
-      }));
-      return;
+        role: 'Please select a role',
+      }))
+      return
     }
-    onSubmit(formData as UserCreatePayload);
-    resetForm();
-  };
+    onSubmit(formData as UserCreatePayload)
+    resetForm()
+  }
 
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
+        e.preventDefault()
+        handleSubmit()
       }}
     >
       <InputGroup>
@@ -104,7 +104,7 @@ const CreateUser = ({
           placeholder="email@email.com"
           value={formData.email}
           onChange={(e: { target: { value: string } }) =>
-            handleChange(e.target.value, "email")
+            handleChange(e.target.value, 'email')
           }
         />
       </InputGroup>
@@ -117,7 +117,7 @@ const CreateUser = ({
           placeholder="Username"
           value={formData.username}
           onChange={(e: { target: { value: string } }) =>
-            handleChange(e.target.value, "username")
+            handleChange(e.target.value, 'username')
           }
         />
       </InputGroup>
@@ -128,7 +128,7 @@ const CreateUser = ({
           placeholder="Pick a role for new user"
           value={formData.role}
           onChange={(e: any) => {
-            handleChange(e, "role");
+            handleChange(e, 'role')
           }}
           popupMatchSelectWidth={false}
           options={clusterRoles}
@@ -138,7 +138,7 @@ const CreateUser = ({
         {buttonName}
       </Button>
     </form>
-  );
-};
+  )
+}
 
-export default CreateUser;
+export default CreateUser

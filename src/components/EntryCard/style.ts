@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledEntryCard = styled.div`
   width: 100%;
@@ -7,7 +7,9 @@ export const StyledEntryCard = styled.div`
   padding: 50px;
   margin-bottom: 40px;
   background-color: #fff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   h2 {
     font-weight: 500;
@@ -23,4 +25,4 @@ export const StyledEntryCard = styled.div`
     margin-left: 4px;
     color: #2f8bfd;
   }
-`;
+`

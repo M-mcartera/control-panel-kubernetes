@@ -1,7 +1,7 @@
-import { PersonOutline, SettingsOutline } from "react-ionicons";
-import GlassmorphicCard from "../../components/GlassmorphicGlass";
-import { CardTitleWrapper, CardsWrapper } from "./style";
-
+import { PersonOutline, SettingsOutline } from 'react-ionicons'
+import GlassmorphicCard from '../../components/GlassmorphicGlass'
+import { CardTitleWrapper, CardsWrapper } from './style'
+import React from 'react'
 const SettingsModule = () => {
   const modules = [
     {
@@ -9,47 +9,47 @@ const SettingsModule = () => {
         <CardTitleWrapper>
           <span>Settings</span>
           <SettingsOutline
-            color={"#ffffff"}
+            color={'#ffffff'}
             title="Settings"
             height="40px"
             width="30px"
           />
         </CardTitleWrapper>
       ),
-      content: "Manage your settings",
-      path: "settings",
+      content: 'Manage your settings',
+      path: 'settings',
     },
     {
       title: (
         <CardTitleWrapper>
           <span>Users</span>
           <PersonOutline
-            color={"#ffffff"}
+            color={'#ffffff'}
             title="Users"
             height="40px"
             width="30px"
           />
         </CardTitleWrapper>
       ),
-      content: "Manage your users",
-      path: "users",
+      content: 'Manage your users',
+      path: 'users',
     },
     {
       title: (
         <CardTitleWrapper>
           <span>Roles</span>
           <PersonOutline
-            color={"#ffffff"}
+            color={'#ffffff'}
             title="Roles"
             height="40px"
             width="30px"
           />
         </CardTitleWrapper>
       ),
-      content: "Manage your RBAC roles",
-      path: "roles",
+      content: 'Manage your RBAC roles',
+      path: 'roles',
     },
-  ];
+  ]
   return (
     <CardsWrapper>
       {modules.map((module, index) => (
@@ -61,7 +61,7 @@ const SettingsModule = () => {
         />
       ))}
     </CardsWrapper>
-  );
-};
+  )
+}
 
-export default SettingsModule;
+export default SettingsModule

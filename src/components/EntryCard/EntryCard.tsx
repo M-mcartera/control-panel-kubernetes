@@ -1,11 +1,11 @@
-import { StyledEntryCard } from "./style";
+import { StyledEntryCard } from './style'
 
 type EntryCardProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const EntryCard = ({ children }: EntryCardProps) => {
-  return <StyledEntryCard>{children}</StyledEntryCard>;
-};
+  return <StyledEntryCard>{children}</StyledEntryCard>
+}
 
-export default EntryCard;
+export default EntryCard

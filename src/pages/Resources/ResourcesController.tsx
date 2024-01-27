@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
-import Namespaces from "./Tabs/Namespaces";
+import { useParams } from 'react-router-dom'
+import Namespaces from './Tabs/Namespaces'
 
 const ResourcesController = () => {
-  const { tab } = useParams();
+  const { tab } = useParams()
   switch (tab) {
-    case "namespaces":
-      return <Namespaces />;
+    case 'namespaces':
+      return <Namespaces />
     default:
-      return <h1>Not found</h1>;
+      return <h1>Not found</h1>
   }
-};
+}
 
-export default ResourcesController;
+export default ResourcesController

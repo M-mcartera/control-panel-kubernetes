@@ -1,14 +1,14 @@
-import React from "react";
-import { Card, EmptyBar, FilledBar, Bar, Title, Description } from "./style";
+import React from 'react'
+import { Card, EmptyBar, FilledBar, Bar, Title, Description } from './style'
 
 const FlipOverCard = ({
   onClick,
   title,
   description,
 }: {
-  onClick: () => void;
-  title: string;
-  description: string;
+  onClick: () => void
+  title: string
+  description: string
 }) => {
   return (
     <Card className="card" onClick={onClick}>
@@ -19,7 +19,7 @@ const FlipOverCard = ({
         <FilledBar className="filledbar"></FilledBar>
       </Bar>
     </Card>
-  );
-};
+  )
+}
 
-export default FlipOverCard;
+export default FlipOverCard

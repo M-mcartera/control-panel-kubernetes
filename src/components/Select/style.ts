@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledSelectWrapper = styled.div`
   display: block;
@@ -17,4 +17,4 @@ export const StyledSelectWrapper = styled.div`
     border: 0 !important;
     height: 100%;
   }
-`;
+`

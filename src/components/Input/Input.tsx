@@ -1,7 +1,7 @@
-import { StyledInput } from "./style";
+import { StyledInput } from './style'
 
 const Input = (props: any) => {
-  return <StyledInput {...props} />;
-};
+  return <StyledInput {...props} />
+}
 
-export default Input;
+export default Input

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledInputGroup = styled.div`
   margin-bottom: 24px;
@@ -8,4 +8,4 @@ export const StyledInputGroup = styled.div`
     margin-bottopm: 0.5rem;
     color: #888888;
   }
-`;
+`
